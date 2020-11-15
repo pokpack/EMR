@@ -1,13 +1,10 @@
-import crypto from '../helpers/crypto'
-export default class ParticipantBlock {
-  constructor(index, previousHash, timestamp, data, hash) {
-    this.index = index;
-    this.previousHash = previousHash.toString();
-    this.timestamp = timestamp;
-    this.hash = hash.toString();
-    this.data = data
-  }
-  getData() {
-    return crypto.decryption(this.data)
-  }
+import Block from './Block'
+export default class ParticipantBlock extends Block {
+  // constructor(index, previousHash, timestamp, data, hash) {
+  // this.index = index;
+  // this.previousHash = previousHash.toString();
+  // this.timestamp = timestamp;
+  // this.hash = hash.toString();
+  // this.data = data
+  // }
 }
