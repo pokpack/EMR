@@ -35,12 +35,12 @@ const initHttpServer = () => {
     const b = participantBlockchain[req.params.index]
     res.send(JSON.stringify(new ParticipantBlock(b['index'], b['previousHash'], b['timestamp'], b['data'], b['hash'])))
   });
-  app.get('/participants/:index/data', (req, res) => {
-    const b = participantBlockchain[req.params.index]
-    res.send(new ParticipantBlock(b['index'], b['previousHash'], b['timestamp'], b['data'], b['hash']).getData())
-  });
+  // app.get('/participants/:index/data', (req, res) => {
+  //   const b = participantBlockchain[req.params.index]
+  //   res.send(new ParticipantBlock(b['index'], b['previousHash'], b['timestamp'], b['data'], b['hash']).getData())
+  // });
   app.post('/mineParticipant', (req, res) => {
-    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(req.body.data), participantBlockchain, ParticipantBlock);
+    const newBlock = blockchainsLogic.generateNextBlock(req.body.data, participantBlockchain, ParticipantBlock);
     participantBlockchain = blockchainsLogic.addBlock(newBlock, participantBlockchain)
     broadcast(sockets, blockchainsLogic.responseLatestMsg(participantBlockchain));
     console.log('block added: ' + JSON.stringify(newBlock));
