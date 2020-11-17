@@ -6,14 +6,14 @@ import blockchainsLogic from './src/blockchain/logic'
 import crypto from './src/helpers/crypto'
 import { write, broadcast, initErrorHandler, initMessageHandler } from './src/socket_servers'
 
-const { ParticipantBlock } = models
+const { EMRBlock } = models
 const http_port = process.env.HTTP_PORT || 3001;
 const p2p_port = process.env.P2P_PORT || 6001;
 const initialPeers = process.env.PEERS ? process.env.PEERS.split(',') : [];
-
+const SECRET_KEY = process.env.SECRET_KEY || 'ful6fq';
 let sockets = [];
 
-const getGenesisParticipantBlock = () => {
+const getGenesisEMRBlock = () => {
   return {
     "index": 0,
     "previousHash": `0`,
@@ -23,34 +23,39 @@ const getGenesisParticipantBlock = () => {
   };
 };
 
-let participantBlockchain = [getGenesisParticipantBlock()];
+let EMRBlockchain = [getGenesisEMRBlock()];
+
+const middleware = (req, res, next) => {
+  if (req.headers.authorization === SECRET_KEY)
+    next();
+  else
+    res.send("Impervious")
+};
 
 const initHttpServer = () => {
   const app = express();
   app.use(bodyParser.json());
 
-  // Participants
-  app.get('/participants', (req, res) => res.send(JSON.stringify(participantBlockchain)));
-  app.get('/participants/:index', (req, res) => {
-    const b = participantBlockchain[req.params.index]
-    res.send(JSON.stringify(new ParticipantBlock(b['index'], b['previousHash'], b['timestamp'], b['data'], b['hash'])))
+  app.get('/EMRs', middleware, (req, res) => res.send(JSON.stringify(EMRBlockchain)));
+  app.get('/EMRs/:index', middleware, (req, res) => {
+    const b = EMRBlockchain[req.params.index]
+    res.send(JSON.stringify(new EMRBlock(b['index'], b['previousHash'], b['timestamp'], b['data'], b['hash'])))
   });
   // app.get('/participants/:index/data', (req, res) => {
-  //   const b = participantBlockchain[req.params.index]
-  //   res.send(new ParticipantBlock(b['index'], b['previousHash'], b['timestamp'], b['data'], b['hash']).getData())
+  //   const b = EMRBlockchain[req.params.index]
+  //   res.send(new EMRBlock(b['index'], b['previousHash'], b['timestamp'], b['data'], b['hash']).getData())
   // });
-  app.post('/mineParticipant', (req, res) => {
-    const newBlock = blockchainsLogic.generateNextBlock(req.body.data, participantBlockchain, ParticipantBlock);
-    participantBlockchain = blockchainsLogic.addBlock(newBlock, participantBlockchain)
-    broadcast(sockets, blockchainsLogic.responseLatestMsg(participantBlockchain));
+  app.post('/mineEMR', middleware, (req, res) => {
+    const newBlock = blockchainsLogic.generateNextBlock(req.body.data, EMRBlockchain, EMRBlock);
+    EMRBlockchain = blockchainsLogic.addBlock(newBlock, EMRBlockchain)
+    broadcast(sockets, blockchainsLogic.responseLatestMsg(EMRBlockchain));
     console.log('block added: ' + JSON.stringify(newBlock));
     res.send(JSON.stringify(newBlock));
   });
-  // Peers
-  app.get('/peers', (req, res) => {
+  app.get('/peers', middleware, (req, res) => {
     res.send(sockets.map(s => s._socket.remoteAddress + ':' + s._socket.remotePort));
   });
-  app.post('/addPeer', (req, res) => {
+  app.post('/addPeer', middleware, (req, res) => {
     connectToPeers([req.body.peer]);
     res.send();
   });
@@ -66,7 +71,7 @@ const initP2PServer = () => { //init
 };
 const initConnection = (ws) => { //init
   sockets.push(ws);
-  initMessageHandler(ws, participantBlockchain, sockets, getGenesisParticipantBlock, (b) => { participantBlockchain = b });
+  initMessageHandler(ws, EMRBlockchain, sockets, getGenesisEMRBlock, (b) => { EMRBlockchain = b });
   initErrorHandler(ws, sockets, (s) => { sockets = s });
   write(ws, blockchainsLogic.queryChainLengthMsg());
 };

@@ -18,8 +18,10 @@ HTTP_PORT=3002 P2P_PORT=6002 PEERS=ws://localhost:6001,ws://localhost:6003,ws://
 HTTP_PORT=3003 P2P_PORT=6003 PEERS=ws://localhost:6001,ws://localhost:6002,ws://localhost:6004 SECRET_KEY=x]vf4yp0yf npm start
 HTTP_PORT=3004 P2P_PORT=6004 PEERS=ws://localhost:6001,ws://localhost:6002,ws://localhost:6003 SECRET_KEY=x]vf4yp0yf npm start
 
+curl -H "Content-type:application/json" -H "Authorization: x]vf4yp0yf" --data '{"data" : {"first_name": "firstname", "last_name" : "last_name"}}' http://localhost:3002/mineEMR
 
-curl -H "Content-type:application/json" --data '{"data" : {"user_id": "1","first_name": "firstname", "last_name" : "last_name"}}' http://localhost:3001/mineParticipant
+curl -H "Authorization: x]vf4yp0yf" http://localhost:3001/EMRs
+curl -H "Authorization: x]vf4yp0yf" http://localhost:3001/EMRs/1
 
 ```
 ___________
@@ -36,7 +38,10 @@ set HTTP_PORT=3003 && set P2P_PORT=6003 && set PEERS=ws://localhost:6001,ws://lo
 set HTTP_PORT=3004 && set P2P_PORT=6004 && set PEERS=ws://localhost:6001,ws://localhost:6003,ws://localhost:6002 && set SECRET_KEY=x]vf4yp0yf && npm start
 
 
-curl -H "Content-Type: application/json" -X POST  http://localhost:3001/mineParticipant -d "{\"data\":{\"user_id\": \"1\", \"fist_name\": \"fistname\", \"last_name\": \"lastname\"}}"
+curl -H "Content-Type: application/json" -H "Authorization: x]vf4yp0yf" -X POST  http://localhost:3001/mineEMR -d "{\"data\":{\"user_id\": \"1\", \"fist_name\": \"fistname\", \"last_name\": \"lastname\"}}"
+
+curl -H "Authorization: x]vf4yp0yf" GET http://localhost:3001/EMRs
+curl -H "Authorization: x]vf4yp0yf" GET http://localhost:3001/EMRs/1
 ```
 
 ___________
@@ -48,8 +53,8 @@ ___________
 
 ### Routes
 
-http://localhost:3001/participants/
+http://localhost:3001/EMRs/
 
-http://localhost:3001/participants/1/data
+http://localhost:3001/EMRs/1/data
 
 http://localhost:3001/peers/
