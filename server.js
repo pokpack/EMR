@@ -24,11 +24,17 @@ const initHttpServer = () => {
     res.send(JSON.stringify(new EMRBlock(b['index'], b['previousHash'], b['timestamp'], b['data'], b['hash'])))
   });
   app.post('/mineEMR', middleware, (req, res) => {
-    const newBlock = blockchainsLogic.generateNextBlock(req.body.data, EMRBlockchain, EMRBlock);
+    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(req.body.data), EMRBlockchain, EMRBlock);
+
     EMRBlockchain = blockchainsLogic.addBlock(newBlock, EMRBlockchain)
     broadcast(sockets, blockchainsLogic.responseLatestMsg(EMRBlockchain));
     console.log('block added: ' + JSON.stringify(newBlock));
     res.send(JSON.stringify(newBlock));
+  });
+
+  app.get('/EMRS/:index/data', (req, res) => {
+    const b = EMRBlockchain[req.params.index]
+    res.send(new EMRBlock(b['index'], b['previousHash'], b['timestamp'], b['data'], b['hash']).getData())
   });
   app.get('/peers', middleware, (req, res) => {
     res.send(sockets.map(s => s._socket.remoteAddress + ':' + s._socket.remotePort));
