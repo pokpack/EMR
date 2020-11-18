@@ -2,8 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import WebSocket from 'ws'
 import models from './src/models'
-import blockchainsLogic from './src/blockchain/logic'
-import crypto from './src/helpers/crypto'
+import blockchainsLogic, { getGenesisEMRBlock } from './src/blockchain/logic'
 import middleware, { updateToken } from './middleware'
 import { write, broadcast, initErrorHandler, initMessageHandler } from './src/socket_servers'
 
@@ -12,16 +11,6 @@ const http_port = process.env.HTTP_PORT || 3001;
 const p2p_port = process.env.P2P_PORT || 6001;
 const initialPeers = process.env.PEERS ? process.env.PEERS.split(',') : [];
 let sockets = [];
-
-const getGenesisEMRBlock = () => {
-  return {
-    "index": 0,
-    "previousHash": `0`,
-    "timestamp": 1465154705,
-    "hash": `816534932c2b7154836da6afc367695e6337db8a921823784c14378abed4f7d7`,
-    "data": `U2FsdGVkX19rnP7i0ysECsV/l7QeKI8oN7oXOyM4vN4=`
-  };
-};
 
 let EMRBlockchain = [getGenesisEMRBlock()];
 
@@ -34,10 +23,6 @@ const initHttpServer = () => {
     const b = EMRBlockchain[req.params.index]
     res.send(JSON.stringify(new EMRBlock(b['index'], b['previousHash'], b['timestamp'], b['data'], b['hash'])))
   });
-  // app.get('/participants/:index/data', (req, res) => {
-  //   const b = EMRBlockchain[req.params.index]
-  //   res.send(new EMRBlock(b['index'], b['previousHash'], b['timestamp'], b['data'], b['hash']).getData())
-  // });
   app.post('/mineEMR', middleware, (req, res) => {
     const newBlock = blockchainsLogic.generateNextBlock(req.body.data, EMRBlockchain, EMRBlock);
     EMRBlockchain = blockchainsLogic.addBlock(newBlock, EMRBlockchain)
