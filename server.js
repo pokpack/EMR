@@ -4,13 +4,13 @@ import WebSocket from 'ws'
 import models from './src/models'
 import blockchainsLogic from './src/blockchain/logic'
 import crypto from './src/helpers/crypto'
+import middleware, { updateToken } from './middleware'
 import { write, broadcast, initErrorHandler, initMessageHandler } from './src/socket_servers'
 
 const { EMRBlock } = models
 const http_port = process.env.HTTP_PORT || 3001;
 const p2p_port = process.env.P2P_PORT || 6001;
 const initialPeers = process.env.PEERS ? process.env.PEERS.split(',') : [];
-const SECRET_KEY = process.env.SECRET_KEY || 'ful6fq';
 let sockets = [];
 
 const getGenesisEMRBlock = () => {
@@ -24,13 +24,6 @@ const getGenesisEMRBlock = () => {
 };
 
 let EMRBlockchain = [getGenesisEMRBlock()];
-
-const middleware = (req, res, next) => {
-  if (req.headers.authorization === SECRET_KEY)
-    next();
-  else
-    res.send("Impervious")
-};
 
 const initHttpServer = () => {
   const app = express();
@@ -58,6 +51,14 @@ const initHttpServer = () => {
   app.post('/addPeer', middleware, (req, res) => {
     connectToPeers([req.body.peer]);
     res.send();
+  });
+  app.post('/newToken', middleware, (req, res) => {
+    if (req.body.token) {
+      updateToken(req.body.token);
+      res.send(`Successful`);
+    } else {
+      res.send('Unsuccessful')
+    }
   });
   app.listen(http_port, () => console.log('Listening http on port: ' + http_port));
 };
