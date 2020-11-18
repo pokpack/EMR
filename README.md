@@ -23,8 +23,6 @@ curl -H "Content-type:application/json" -H "Authorization: Bearer x]vf4yp0yf" --
 curl -H "Authorization: Bearer x]vf4yp0yf" http://localhost:3001/EMRs
 curl -H "Authorization: Bearer x]vf4yp0yf" http://localhost:3001/EMRs/1
 
-curl -H "Authorization: Bearer x]vf4yp0yf" http://localhost:3001/newToken
-
 curl -H "Content-type:application/json" -H "Authorization: Bearer x]vf4yp0yf" --data '{"token" : "xxx"}' http://localhost:3001/newToken
 
 ```
