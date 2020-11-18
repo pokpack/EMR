@@ -45,7 +45,7 @@ curl -H "Content-Type: application/json" -H "Authorization: Bearer x]vf4yp0yf" -
 curl -H "Authorization: Bearer x]vf4yp0yf" GET http://localhost:3001/EMRs
 curl -H "Authorization: Bearer x]vf4yp0yf" GET http://localhost:3001/EMRs/1
 
-curl -H "Content-Type: application/json" -H "Authorization: Bearer x]vf4yp0yf" -X POST  http://localhost:3001/mineEMR -d "{\"data\": \"xxx\"}"
+curl -H "Content-Type: application/json" -H "Authorization: Bearer x]vf4yp0yf" -X POST  http://localhost:3001/newToken -d "{\"data\": \"xxx\"}"
 
 ```
 
