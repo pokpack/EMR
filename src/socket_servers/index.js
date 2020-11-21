@@ -1,4 +1,4 @@
-
+import { checkdifference } from '../helpers'
 import blockchainsLogic, { MessageType } from '../blockchain/logic'
 const write = (ws, message) => ws.send(JSON.stringify(message));
 const broadcast = (sockets, message) => sockets.forEach(ws => write(ws, message));
@@ -16,6 +16,9 @@ const initMessageHandler = (ws, blockchain, sockets, getGenesisBlock, updateBloc
   ws.on('message', (data) => {
     const message = JSON.parse(data);
     console.log('Received message' + JSON.stringify(message));
+    console.log("===========MessageByteSize===========")
+    console.log(Buffer.byteLength(data, 'utf8'), 'byte')
+    console.log("=====================================")
     switch (message.type) {
       case MessageType.QUERY_LATEST:
         write(ws, blockchainsLogic.responseLatestMsg(blockchain));
@@ -24,6 +27,7 @@ const initMessageHandler = (ws, blockchain, sockets, getGenesisBlock, updateBloc
         write(ws, blockchainsLogic.responseChainMsg(blockchain));
         break;
       case MessageType.RESPONSE_BLOCKCHAIN:
+        checkdifference(new Date(JSON.parse(message.data)[0].timestamp));
         updateBlockchain(blockchainsLogic.handleBlockchainResponse(message, blockchain, sockets, getGenesisBlock));
         break;
     }

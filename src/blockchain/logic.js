@@ -96,7 +96,7 @@ const addBlock = (newBlock, blockchain) => {
 const generateNextBlock = (blockData, blockchain, Block) => {
   const previousBlock = getLatestBlock(blockchain);
   const nextIndex = previousBlock.index + 1;
-  const nextTimestamp = new Date().getTime() / 1000;
+  const nextTimestamp = Date.now();
   const nextHash = helpers.crypto.calculateHash(nextIndex, previousBlock.hash, nextTimestamp, blockData);
   return new Block(nextIndex, previousBlock.hash, nextTimestamp, blockData, nextHash);
 };
