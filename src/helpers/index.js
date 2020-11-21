@@ -19,7 +19,8 @@ const timeDifference = (date1, date2) => {
     daysDifference + ' day/s ' +
     hoursDifference + ' hour/s ' +
     minutesDifference + ' minute/s ' +
-    secondsDifference + ' second/s ');
+    secondsDifference + ' second/s ' +
+    difference + 's');
   console.log("=======================================")
 }
 
