@@ -1,3 +1,4 @@
 import crypto from './crypto'
-
-export default { crypto }
+import logic from './logic'
+export { logic }
+export default { crypto, logic }
