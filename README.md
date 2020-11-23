@@ -56,7 +56,7 @@ ___________
 
 ```
 
-  POST /api/:hn/admit/:emrId # พยาบาลสร้างรายการ admin
+  POST /api/:hn/admit/:emrId # พยาบาลสร้างรายการ admit
   POST /api/:hn/examination/:emrId # หมอตรวจ
   POST /api/:hn/dispense/:emrId # เภสัชจ่ายยา
   POST /api/:hn/treat/:emrId # หมอ/พยาบาล รักษา
