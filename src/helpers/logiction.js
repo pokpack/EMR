@@ -1,8 +1,11 @@
 
-export const gardenEMRId = (id, updateEMRIdFn, data) => {
-  id += 1
-  data.emr_id = id
-  updateEMRIdFn(id)
+export const STATE_ID = {
+  ADMIT: 1
+}
+export const setId = (emrId, hn, stateId, data) => {
+  data.emrId = emrId
+  data.hn = hn
+  data.stateId = stateId
   return data
 }
-export default { gardenEMRId };
+export default { setId };
