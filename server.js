@@ -2,7 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import WebSocket from 'ws'
 import models from './src/models'
-import { setId, STATE_ID } from './src/helpers/logiction'
+import { setState, STATE_ID } from './src/helpers/logiction'
 import crypto from './src/helpers/crypto'
 import blockchainsLogic, { getGenesisEMRBlock } from './src/blockchain/logic'
 import middleware, { updateToken } from './middleware'
@@ -21,28 +21,56 @@ const initHttpServer = () => {
   app.use(bodyParser.json());
 
   app.post('/api/:hn/admit/:emrId', middleware, (req, res) => {
-    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(setId(req.params.emrId, req.params.hn, STATE_ID.ADMIT, req.body.data)), EMRBlockchain, EMRBlock);
+    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(setState(req.params.emrId, req.params.hn, STATE_ID.ADMIT, req.body.data)), EMRBlockchain, EMRBlock);
+    EMRBlockchain = blockchainsLogic.addBlock(newBlock, EMRBlockchain)
+    broadcast(sockets, blockchainsLogic.responseLatestMsg(EMRBlockchain));
+    res.send(JSON.stringify(newBlock));
+  });
+
+  app.post('/api/:hn/examination/:emrId', middleware, (req, res) => {
+    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(setState(req.params.emrId, req.params.hn, STATE_ID.EXAMINATION, req.body.data)), EMRBlockchain, EMRBlock);
+    EMRBlockchain = blockchainsLogic.addBlock(newBlock, EMRBlockchain)
+    broadcast(sockets, blockchainsLogic.responseLatestMsg(EMRBlockchain));
+    res.send(JSON.stringify(newBlock));
+  });
+
+  app.post('/api/:hn/dispense/:emrId', middleware, (req, res) => {
+    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(setState(req.params.emrId, req.params.hn, STATE_ID.DISPENSE, req.body.data)), EMRBlockchain, EMRBlock);
+    EMRBlockchain = blockchainsLogic.addBlock(newBlock, EMRBlockchain)
+    broadcast(sockets, blockchainsLogic.responseLatestMsg(EMRBlockchain));
+    res.send(JSON.stringify(newBlock));
+  });
+
+
+  app.post('/api/:hn/treat/:emrId', middleware, (req, res) => {
+    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(setState(req.params.emrId, req.params.hn, STATE_ID.TREAT, req.body.data)), EMRBlockchain, EMRBlock);
     EMRBlockchain = blockchainsLogic.addBlock(newBlock, EMRBlockchain)
     broadcast(sockets, blockchainsLogic.responseLatestMsg(EMRBlockchain));
     console.log('block added: ' + JSON.stringify(newBlock));
     res.send(JSON.stringify(newBlock));
   });
+
+  app.get('/api/admits', middleware, (req, res) => res.send(JSON.stringify(EMRBlockchain)));
+  app.get('/api/examinations', middleware, (req, res) => res.send(JSON.stringify(EMRBlockchain)));
+  app.get('/api/dispenses', middleware, (req, res) => res.send(JSON.stringify(EMRBlockchain)));
+  // app.get('/api/treats', middleware, (req, res) => res.send(JSON.stringify(EMRBlockchain)));
+
+  app.get('/api/:hn/emr/:emrId', middleware, (req, res) => res.send(JSON.stringify(EMRBlockchain)));
+  app.get('/api/:hn/history', middleware, (req, res) => res.send(JSON.stringify(EMRBlockchain)));
+
 
   app.get('/EMRs', middleware, (req, res) => res.send(JSON.stringify(EMRBlockchain)));
   app.get('/EMRs/:index', middleware, (req, res) => {
     const b = EMRBlockchain[req.params.index]
     res.send(JSON.stringify(new EMRBlock(b['index'], b['previousHash'], b['timestamp'], b['data'], b['hash'])))
   });
-
   app.post('/mineEMR', middleware, (req, res) => {
     const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(req.body.data), EMRBlockchain, EMRBlock);
-
     EMRBlockchain = blockchainsLogic.addBlock(newBlock, EMRBlockchain)
     broadcast(sockets, blockchainsLogic.responseLatestMsg(EMRBlockchain));
     console.log('block added: ' + JSON.stringify(newBlock));
     res.send(JSON.stringify(newBlock));
   });
-
   app.get('/EMRS/:index/data', (req, res) => {
     const b = EMRBlockchain[req.params.index]
     res.send(new EMRBlock(b['index'], b['previousHash'], b['timestamp'], b['data'], b['hash']).getData())
@@ -50,6 +78,7 @@ const initHttpServer = () => {
   app.get('/peers', middleware, (req, res) => {
     res.send(sockets.map(s => s._socket.remoteAddress + ':' + s._socket.remotePort));
   });
+
   app.post('/addPeer', middleware, (req, res) => {
     connectToPeers([req.body.peer]);
     res.send();

@@ -51,3 +51,25 @@ ___________
 
 
 ``` docker-compose up ```
+___________
+### **Routes**
+
+```
+
+  POST /api/:hn/admit/:emrId # พยาบาลสร้างรายการ admin
+  POST /api/:hn/examination/:emrId # หมอตรวจ
+  POST /api/:hn/dispense/:emrId # เภสัชจ่ายยา
+  POST /api/:hn/treat/:emrId # หมอ/พยาบาล รักษา
+
+  GET /api/admits # รายการ admin
+  GET /api/examinations # รายการ หมอตรวจ
+  GET /api/dispenses # รายการ หมอตรวจ
+
+  GET /api/:hn/emr/:emrId # ข้อมูล เข้ารักษา
+  GET /api/:hn/history # ข้อมูลประวัติ
+
+ # :hn id ผู้ป่วย
+ # :emrId id เข้ารักษา
+ ```
+
+
