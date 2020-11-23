@@ -3,6 +3,7 @@ import bodyParser from 'body-parser'
 import WebSocket from 'ws'
 import models from './src/models'
 import { gardenEMRId } from './src/helpers/logic'
+import crypto from './src/helpers/crypto'
 import blockchainsLogic, { getGenesisEMRBlock } from './src/blockchain/logic'
 import middleware, { updateToken } from './middleware'
 import { write, broadcast, initErrorHandler, initMessageHandler } from './src/socket_servers'
@@ -12,7 +13,7 @@ const http_port = process.env.HTTP_PORT || 3001;
 const p2p_port = process.env.P2P_PORT || 6001;
 const initialPeers = process.env.PEERS ? process.env.PEERS.split(',') : [];
 let sockets = [];
-let emr_id = 1;
+let emr_id = 0;
 let EMRBlockchain = [getGenesisEMRBlock()];
 
 const updateEMRId = (new_id) => { emr_id = new_id };
@@ -20,9 +21,8 @@ const initHttpServer = () => {
   const app = express();
   app.use(bodyParser.json());
 
-  app.post('api/nurse/admit/new/:hn', middleware, (req, res) => {
+  app.post('/api/nurse/admit/new/:hn', middleware, (req, res) => {
     const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(gardenEMRId(emr_id, updateEMRId, req.body.data)), EMRBlockchain, EMRBlock);
-
     EMRBlockchain = blockchainsLogic.addBlock(newBlock, EMRBlockchain)
     broadcast(sockets, blockchainsLogic.responseLatestMsg(EMRBlockchain));
     console.log('block added: ' + JSON.stringify(newBlock));
@@ -85,7 +85,7 @@ const connectToPeers = (newPeers) => { //init
     const ws = new WebSocket(peer);
     ws.on('open', () => initConnection(ws));
     ws.on('error', () => {
-      console.log('connection failed')
+      console.log('connection failed :' + peer)
     });
   });
 };

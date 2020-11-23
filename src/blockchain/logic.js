@@ -96,16 +96,15 @@ const addBlock = (newBlock, blockchain) => {
 const generateNextBlock = (blockData, blockchain, Block) => {
   const previousBlock = getLatestBlock(blockchain);
   const nextIndex = previousBlock.index + 1;
-  const nextTimestamp = new Date().getTime() / 1000;
+  const nextTimestamp = Date.now();
   const nextHash = helpers.crypto.calculateHash(nextIndex, previousBlock.hash, nextTimestamp, blockData);
   return new Block(nextIndex, previousBlock.hash, nextTimestamp, blockData, nextHash);
 };
-
 const getGenesisEMRBlock = () => {
   return {
     "index": 0,
     "previousHash": `0`,
-    "timestamp": 1465154705,
+    "timestamp": Date.now(),
     "hash": `816534932c2b7154836da6afc367695e6337db8a921823784c14378abed4f7d7`,
     "data": `U2FsdGVkX19rnP7i0ysECsV/l7QeKI8oN7oXOyM4vN4=`
   };
