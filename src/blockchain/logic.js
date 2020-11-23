@@ -104,7 +104,7 @@ const getGenesisEMRBlock = () => {
   return {
     "index": 0,
     "previousHash": `0`,
-    "timestamp": Date.now(),
+    "timestamp": 1606147699953,
     "hash": `816534932c2b7154836da6afc367695e6337db8a921823784c14378abed4f7d7`,
     "data": `U2FsdGVkX19rnP7i0ysECsV/l7QeKI8oN7oXOyM4vN4=`
   };
