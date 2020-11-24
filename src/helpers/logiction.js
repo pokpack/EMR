@@ -10,7 +10,6 @@ export const setState = (emrId, hn, stateId, data) => {
   data.hn = hn
   data.stateId = stateId
   data.finished = data.finished ? true : false
-
   return data
 }
 
@@ -25,14 +24,43 @@ export const formateData = (dataAll = []) => {
   return datas;
 }
 
-export const dataAdmits = (dataAll = []) => {
-  const admits = []
+export const selectionByStateId = (dataAll, stateId) => {
+
+  const selecteDatas = []
   const objFormateData = formateData(dataAll)
-  console.log("*****", objFormateData);
-  // objFormateData.forEach((key, index) => {
-  //   console.log(`${key}: ${objFormateData[key]}`);
-  // });
-  return objFormateData;
+  Object.keys(objFormateData).forEach(key => {
+    const obj = objFormateData[key]
+    if (obj.stateId === stateId && !obj.finished) {
+      selecteDatas.push(obj)
+    }
+  });
+  return selecteDatas;
+}
+
+export const dataAdmits = (dataAll = []) => {
+  return selectionByStateId(dataAll, STATE_ID.ADMIT)
+}
+
+export const dataExaminations = (dataAll = []) => {
+  return selectionByStateId(dataAll, STATE_ID.EXAMINATION)
+}
+
+export const dataDispenses = (dataAll = []) => {
+  return selectionByStateId(dataAll, STATE_ID.DISPENSE)
+}
+export const dataEMRId = (dataAll = [], hn, emrId) => {
+  return (formateData(dataAll) || {})[emrId];
+}
+export const dataHistory = (dataAll = [], hn) => {
+  const selecteDatas = []
+  const objFormateData = formateData(dataAll)
+  Object.keys(objFormateData).forEach(key => {
+    const obj = objFormateData[key]
+    if (obj.hn === hn) {
+      selecteDatas.push(obj)
+    }
+  });
+  return selecteDatas;
 }
 
 export default { setState };
