@@ -16,6 +16,8 @@ export const setState = (emrId, hn, stateId, data) => {
 export const formateData = (dataAll = []) => {
   const datas = {}
   dataAll.forEach(obj => {
+  	console.log('-------2',obj.data, decryption(obj.data))
+  	console.log("00000end0000")
     const objDecryption = JSON.parse(decryption(obj.data) || {})
     if (objDecryption.emrId) {
       datas[objDecryption.emrId] = Object.assign((datas[objDecryption.emrId] || {}), objDecryption);
@@ -34,10 +36,12 @@ export const selectionByStateId = (dataAll, stateId) => {
       selecteDatas.push(obj)
     }
   });
+  console.log("1111", selecteDatas)
   return selecteDatas;
 }
 
 export const dataAdmits = (dataAll = []) => {
+	console.log("======", dataAll)
   return selectionByStateId(dataAll, STATE_ID.ADMIT)
 }
 

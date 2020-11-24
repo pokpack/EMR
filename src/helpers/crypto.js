@@ -10,10 +10,10 @@ export const calculateHashForBlock = (block) => {
 };
 
 export const encryption = (data) => {
-  return CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
+  return JSON.stringify(data);
 };
 export const decryption = (ciphertext) => {
-  return CryptoJS.AES.decrypt(ciphertext, SECRET_KEY).toString(CryptoJS.enc.Utf8);
+  return ciphertext;
 };
 
 export default { calculateHash, calculateHashForBlock, encryption, decryption }
