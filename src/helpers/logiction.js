@@ -1,4 +1,4 @@
-
+import { decryption } from './crypto'
 export const STATE_ID = {
   ADMIT: 1,
   EXAMINATION: 2,
@@ -13,4 +13,26 @@ export const setState = (emrId, hn, stateId, data) => {
 
   return data
 }
+
+export const formateData = (dataAll = []) => {
+  const datas = {}
+  dataAll.forEach(obj => {
+    const objDecryption = JSON.parse(decryption(obj.data) || {})
+    if (objDecryption.emrId) {
+      datas[objDecryption.emrId] = Object.assign((datas[objDecryption.emrId] || {}), objDecryption);
+    }
+  });
+  return datas;
+}
+
+export const dataAdmits = (dataAll = []) => {
+  const admits = []
+  const objFormateData = formateData(dataAll)
+  console.log("*****", objFormateData);
+  // objFormateData.forEach((key, index) => {
+  //   console.log(`${key}: ${objFormateData[key]}`);
+  // });
+  return objFormateData;
+}
+
 export default { setState };

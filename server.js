@@ -2,7 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import WebSocket from 'ws'
 import models from './src/models'
-import { setState, STATE_ID } from './src/helpers/logiction'
+import { setState, STATE_ID, dataAdmits } from './src/helpers/logiction'
 import crypto from './src/helpers/crypto'
 import blockchainsLogic, { getGenesisEMRBlock } from './src/blockchain/logic'
 import middleware, { updateToken } from './middleware'
@@ -50,7 +50,9 @@ const initHttpServer = () => {
     res.send(JSON.stringify(newBlock));
   });
 
-  app.get('/api/admits', middleware, (req, res) => res.send(JSON.stringify(EMRBlockchain)));
+  app.get('/api/admits', middleware, (req, res) => {
+    res.send(JSON.stringify(dataAdmits(EMRBlockchain)))
+  });
   app.get('/api/examinations', middleware, (req, res) => res.send(JSON.stringify(EMRBlockchain)));
   app.get('/api/dispenses', middleware, (req, res) => res.send(JSON.stringify(EMRBlockchain)));
   // app.get('/api/treats', middleware, (req, res) => res.send(JSON.stringify(EMRBlockchain)));
