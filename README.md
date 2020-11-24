@@ -61,9 +61,9 @@ ___________
   POST /api/:hn/dispense/:emrId # เภสัชจ่ายยา
   POST /api/:hn/treat/:emrId # หมอ/พยาบาล รักษา
 
-  GET /api/admits # รายการ admin
+  GET /api/admits # รายการ admit
   GET /api/examinations # รายการ หมอตรวจ
-  GET /api/dispenses # รายการ หมอตรวจ
+  GET /api/dispenses # รายการ เภสัชจ่ายยา
 
   GET /api/:hn/emr/:emrId # ข้อมูล เข้ารักษา
   GET /api/:hn/history # ข้อมูลประวัติ
