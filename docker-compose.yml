@@ -1,8 +1,8 @@
-version: '2'
+version: '3.8'
 services:
   doctor_node:
     environment:
-      - PEERS=ws://nurse_node:6001,ws://pharmacist_node:6001,ws://patient_node:6001,ws://nurse_node2:6001,ws://pharmacist_node2:6001,ws://patient_node2:6001,ws://doctor_node:6001
+      - PEERS=ws://nurse_node:6001,ws://pharmacist_node:6001,ws://patient_node:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
@@ -11,7 +11,7 @@ services:
       - "3001:3001"
   pharmacist_node:
     environment:
-      - PEERS=ws://doctor_node:6001,ws://nurse_node:6001,ws://patient_node:6001,ws://doctor_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001,ws://pharmacist_node2:6001
+      - PEERS=ws://doctor_node:6001,ws://nurse_node:6001,ws://patient_node:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
@@ -20,7 +20,7 @@ services:
       - "3002:3001"
   nurse_node:
     environment:
-      - PEERS=ws://doctor_node:6001,ws://pharmacist_node:6001,ws://patient_node:6001,ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://patient_node2:6001,ws://nurse_node2:6001
+      - PEERS=ws://doctor_node:6001,ws://pharmacist_node:6001,ws://patient_node:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
@@ -29,46 +29,66 @@ services:
       - "3003:3001"
   patient_node:
     environment:
-      - PEERS=ws://doctor_node:6001,ws://pharmacist_node:6001,ws://nurse_node:6001,ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001
+      - PEERS=ws://doctor_node:6001,ws://pharmacist_node:6001,ws://nurse_node:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
       dockerfile: Dockerfile
     ports:
       - "3004:3001"
-  doctor_node2:
+
+  doctor_web:
     environment:
-      - PEERS=ws://nurse_node2:6001,ws://pharmacist_node2:6001,ws://patient_node2:6001,ws://nurse_node:6001,ws://pharmacist_node:6001,ws://patient_node:6001,ws://doctor_node:6001
-      - SECRET_KEY=x]vf4yp0yf
+      - EMR_API_URL=http://doctor_node:3001
+      - DB_URL=http://db:3306
     build:
-      context: ./
+      context: ./frontend/doctor_web
       dockerfile: Dockerfile
     ports:
-      - "3005:3001"
-  pharmacist_node2:
+      - "5001:80"
+  nurse_web:
     environment:
-      - PEERS=ws://doctor_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001,ws://doctor_node:6001,ws://nurse_node:6001,ws://patient_node:6001,ws://patient_node:6001
-      - SECRET_KEY=x]vf4yp0yf
+      - EMR_API_URL=http://nurse_node:3001
+      - DB_URL=http://db:3306
     build:
-      context: ./
+      context: ./frontend/nurse_web
       dockerfile: Dockerfile
     ports:
-      - "3006:3001"
-  nurse_node2:
+      - "5002:80"
+  pharmacist_web:
     environment:
-      - PEERS=ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://patient_node:6001,ws://doctor_node:6001,ws://pharmacist_node:6001,ws://patient_node:6001,ws://nurse_node:6001
-      - SECRET_KEY=x]vf4yp0yf
+      - EMR_API_URL=http://pharmacist_node:3001
+      - DB_URL=http://db:3306
     build:
-      context: ./
+      context: ./frontend/pharmacist_web
       dockerfile: Dockerfile
     ports:
-      - "3007:3001"
-  patient_node2:
+      - "5003:80"
+  patient_web:
     environment:
-      - PEERS=ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://nurse_node2:6001,ws://doctor_node:6001,ws://pharmacist_node:6001,ws://nurse_node:6001,ws://patient_node:6001
-      - SECRET_KEY=x]vf4yp0yf
+      - EMR_API_URL=http://patient_node:3001
+      - DB_URL=http://db:3306
     build:
-      context: ./
+      context: ./frontend/patient_web
       dockerfile: Dockerfile
     ports:
-      - "3008:3001"
+      - "5004:80"
+
+  db:
+      image: mysql:8.0
+      container_name: appsDB
+      restart: always
+      ports:
+        - '6603:3306'
+      environment:
+        MYSQL_ROOT_PASSWORD: helloworld
+  phpmyadmin:
+      depends_on:
+        - db
+      image: phpmyadmin/phpmyadmin
+      container_name: phpmyadmin
+      restart: always
+      ports:
+        - '8181:80'
+      environment:
+        PMA_HOST: db
