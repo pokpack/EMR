@@ -75,7 +75,7 @@ ___________
 ### **Diagram**
 
 
-![alt tag]("doc/Untitled Diagram.png")
+![alt tag](doc/diagram.png)
 
 
 
