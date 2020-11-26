@@ -71,5 +71,11 @@ ___________
  # :hn id ผู้ป่วย
  # :emrId id เข้ารักษา
  ```
+___________
+### **Diagram**
+
+
+![alt tag](doc/Untitled Diagram.png)
+
 
 
