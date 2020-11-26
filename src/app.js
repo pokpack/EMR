@@ -20,21 +20,21 @@ const initHttpServer = () => {
   app.use(bodyParser.json());
 
   app.post('/api/:hn/admit/:emrId', middleware, (req, res) => {
-    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(setState(req.params.emrId, req.params.hn, STATE_ID.ADMIT, req.body.data)), EMRBlockchain, EMRBlock);
+    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(setState(req.params.emrId, req.params.hn, STATE_ID.ADMIT, req.body)), EMRBlockchain, EMRBlock);
     EMRBlockchain = blockchainsLogic.addBlock(newBlock, EMRBlockchain)
     broadcast(sockets, blockchainsLogic.responseLatestMsg(EMRBlockchain));
     res.send(JSON.stringify(newBlock));
   });
 
   app.post('/api/:hn/examination/:emrId', middleware, (req, res) => {
-    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(setState(req.params.emrId, req.params.hn, STATE_ID.EXAMINATION, req.body.data)), EMRBlockchain, EMRBlock);
+    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(setState(req.params.emrId, req.params.hn, STATE_ID.EXAMINATION, req.body)), EMRBlockchain, EMRBlock);
     EMRBlockchain = blockchainsLogic.addBlock(newBlock, EMRBlockchain)
     broadcast(sockets, blockchainsLogic.responseLatestMsg(EMRBlockchain));
     res.send(JSON.stringify(newBlock));
   });
 
   app.post('/api/:hn/dispense/:emrId', middleware, (req, res) => {
-    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(setState(req.params.emrId, req.params.hn, STATE_ID.DISPENSE, req.body.data)), EMRBlockchain, EMRBlock);
+    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(setState(req.params.emrId, req.params.hn, STATE_ID.DISPENSE, req.body)), EMRBlockchain, EMRBlock);
     EMRBlockchain = blockchainsLogic.addBlock(newBlock, EMRBlockchain)
     broadcast(sockets, blockchainsLogic.responseLatestMsg(EMRBlockchain));
     res.send(JSON.stringify(newBlock));
@@ -42,7 +42,7 @@ const initHttpServer = () => {
 
 
   app.post('/api/:hn/treat/:emrId', middleware, (req, res) => {
-    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(setState(req.params.emrId, req.params.hn, STATE_ID.TREAT, req.body.data)), EMRBlockchain, EMRBlock);
+    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(setState(req.params.emrId, req.params.hn, STATE_ID.TREAT, req.body)), EMRBlockchain, EMRBlock);
     EMRBlockchain = blockchainsLogic.addBlock(newBlock, EMRBlockchain)
     broadcast(sockets, blockchainsLogic.responseLatestMsg(EMRBlockchain));
     console.log('block added: ' + JSON.stringify(newBlock));
