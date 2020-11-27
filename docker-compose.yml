@@ -49,7 +49,7 @@ services:
   doctor_web:
     environment:
       - EMR_API_URL=http://doctor_node:3001
-      - DB_URL=http://db:3306
+      - DB_URL=http://db
     build:
       context: ./frontend/doctor_web
       dockerfile: Dockerfile
@@ -60,7 +60,7 @@ services:
   nurse_web:
     environment:
       - EMR_API_URL=http://nurse_node:3001
-      - DB_URL=http://db:3306
+      - DB_URL=http://db
     build:
       context: ./frontend/nurse_web
       dockerfile: Dockerfile
@@ -71,7 +71,7 @@ services:
   pharmacist_web:
     environment:
       - EMR_API_URL=http://pharmacist_node:3001
-      - DB_URL=http://db:3306
+      - DB_URL=http://db
     build:
       context: ./frontend/pharmacist_web
       dockerfile: Dockerfile
@@ -82,7 +82,7 @@ services:
   patient_web:
     environment:
       - EMR_API_URL=http://patient_node:3001
-      - DB_URL=http://db:3306
+      - DB_URL=http://db
     build:
       context: ./frontend/patient_web
       dockerfile: Dockerfile
