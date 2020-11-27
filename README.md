@@ -1,6 +1,6 @@
 # **EMR**
 
-### **Start**
+## **Start**
 
 ```
 git clone https://github.com/pokpack/ERD.git
@@ -50,9 +50,12 @@ ___________
 ### **Docker**
 
 
-``` docker-compose up ```
+``` 
+docker-compose build
+docker-compose up
+```
 ___________
-### **Routes**
+## **Routes**
 
 ```
 
@@ -72,10 +75,27 @@ ___________
  # :emrId id เข้ารักษา
  ```
 ___________
-### **Diagram**
+## **Diagram**
 
 
 ![alt tag](doc/diagram.png)
+___________
+## **Test**
+### Server down 
 
+```
+docker-compose -f docker-compose.test.yml build
+docker-compose -f docker-compose.test.yml up
 
+#call api
+curl -H "Authorization: Bearer x]vf4yp0yf" GET http://localhost:8888/EMRs
+
+docker-compose -f docker-compose.test.yml stop first_node
+
+#call api again
+
+docker-compose -f docker-compose.test.yml stop second_node
+docker-compose -f docker-compose.test.yml start first_node
+
+```
 

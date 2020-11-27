@@ -45,7 +45,6 @@ const initHttpServer = () => {
     const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(setState(req.params.emrId, req.params.hn, STATE_ID.TREAT, req.body)), EMRBlockchain, EMRBlock);
     EMRBlockchain = blockchainsLogic.addBlock(newBlock, EMRBlockchain)
     broadcast(sockets, blockchainsLogic.responseLatestMsg(EMRBlockchain));
-    console.log('block added: ' + JSON.stringify(newBlock));
     res.send(JSON.stringify(newBlock));
   });
 
