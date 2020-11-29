@@ -47,9 +47,15 @@ services:
     networks: 
       - helpcare_app_net
   doctor_web:
+    depends_on:
+      - db
     environment:
       - EMR_API_URL=http://doctor_node:3001
-      - DB_URL=http://db
+      - BASE_URL=http://localhost:5001
+      - DB_URL=db
+      - DB_USER_NAME=dbuser
+      - DB_PASSWORD=userpass
+      - DB_NAME=emr_db
     build:
       context: ./frontend/doctor_web
       dockerfile: Dockerfile
@@ -58,9 +64,15 @@ services:
     networks: 
       - helpcare_app_net
   nurse_web:
+    depends_on:
+      - db
     environment:
       - EMR_API_URL=http://nurse_node:3001
-      - DB_URL=http://db
+      - BASE_URL=http://localhost:5002
+      - DB_URL=db
+      - DB_USER_NAME=dbuser
+      - DB_PASSWORD=userpass
+      - DB_NAME=emr_db
     build:
       context: ./frontend/nurse_web
       dockerfile: Dockerfile
@@ -69,9 +81,15 @@ services:
     networks: 
       - helpcare_app_net
   pharmacist_web:
+    depends_on:
+      - db
     environment:
       - EMR_API_URL=http://pharmacist_node:3001
-      - DB_URL=http://db
+      - BASE_URL=http://localhost:5003
+      - DB_URL=db
+      - DB_USER_NAME=dbuser
+      - DB_PASSWORD=userpass
+      - DB_NAME=emr_db
     build:
       context: ./frontend/pharmacist_web
       dockerfile: Dockerfile
@@ -80,9 +98,15 @@ services:
     networks: 
       - helpcare_app_net
   patient_web:
+    depends_on:
+      - db
     environment:
       - EMR_API_URL=http://patient_node:3001
-      - DB_URL=http://db
+      - BASE_URL=http://localhost:5004
+      - DB_URL=db
+      - DB_USER_NAME=dbuser
+      - DB_PASSWORD=userpass
+      - DB_NAME=emr_db
     build:
       context: ./frontend/patient_web
       dockerfile: Dockerfile
@@ -92,10 +116,10 @@ services:
       - helpcare_app_net
   db:
     image: mysql:8.0
-    container_name: appsDB
     restart: always
     ports:
       - '6603:3306'
+    command: --default-authentication-plugin=mysql_native_password
     volumes:
       - ./frontend/db/emr_db.sql:/docker-entrypoint-initdb.d/emr_db.sql
     environment:

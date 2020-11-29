@@ -1,13 +1,15 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Api extends CI_Controller {
+class Api extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->load->library('pagination');
-//	$this->load->model('Admin_model');
+        //	$this->load->model('Admin_model');
         $this->load->model('Main_model');
     }
 
@@ -26,13 +28,13 @@ class Api extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
-    public function test() {
+    public function test()
+    {
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_PORT => "3001",
-            CURLOPT_URL => "http://localhost:3001/EMRs/",
+            CURLOPT_URL => getenv('EMR_API_URL') . "/EMRs/",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -54,13 +56,13 @@ class Api extends CI_Controller {
         echo $response;
     }
 
-    public function post_admit() {
+    public function post_admit()
+    {
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_PORT => "3001",
-            CURLOPT_URL => "http://localhost:3001/api/1/admit/2",
+            CURLOPT_URL => getenv('EMR_API_URL') . "/api/1/admit/2",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -80,14 +82,13 @@ class Api extends CI_Controller {
         $err = curl_error($curl);
 
         curl_close($curl);
-        
+
         echo $response;
-        
-//        echo json_encode($_POST);
+
+        //        echo json_encode($_POST);
     }
 
-    public function get_admit() {
-        
+    public function get_admit()
+    {
     }
-
 }

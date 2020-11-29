@@ -1,13 +1,15 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Index extends CI_Controller {
+class Index extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->load->library('pagination');
-//	$this->load->model('Admin_model');
+        //	$this->load->model('Admin_model');
         $this->load->model('Main_model');
     }
 
@@ -26,18 +28,19 @@ class Index extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
-    public function index() {
+    public function index()
+    {
 
-//        echo 123;
-//        exit();
-//        $this->load->view('template/test');
+        //        echo 123;
+        //        exit();
+        //        $this->load->view('template/test');
         $this->load->view('template/header');
         $this->load->view('index');
         $this->load->view('template/footer');
     }
-    
-    public function test() {
-         $this->load->view('test');
-    }
 
+    public function test()
+    {
+        $this->load->view('test');
+    }
 }
