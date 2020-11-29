@@ -46,6 +46,7 @@ services:
       - "3004:3001"
     networks: 
       - helpcare_app_net
+
   doctor_web:
     depends_on:
       - db
@@ -114,6 +115,7 @@ services:
       - "5004:80"
     networks: 
       - helpcare_app_net
+
   db:
     image: mysql:8.0
     restart: always
