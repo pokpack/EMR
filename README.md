@@ -51,8 +51,7 @@ ___________
 
 
 ``` 
-docker-compose build
-docker-compose up
+docker-compose up --build
 ```
 ___________
 ## **Routes**
@@ -84,8 +83,7 @@ ___________
 ### Server down 
 
 ```
-docker-compose -f docker-compose.test.yml build
-docker-compose -f docker-compose.test.yml up
+docker-compose -f docker-compose.test.yml up --build
 
 #call api
 curl -H "Authorization: Bearer x]vf4yp0yf" GET http://localhost:8888/EMRs
