@@ -1,3 +1,3 @@
 [submodule "EMR_fontend"]
-	path = EMR_fontend
+	path = frontend
 	url = https://github.com/pokpack/EMR_fontend
