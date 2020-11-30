@@ -1,1 +1,0 @@
-$(document).ready(function(){$("#summernote-editor").summernote({height:250,minHeight:null,maxHeight:null,focus:!0}),$("#summernote-airmode-editor").summernote({airMode:!0})});
