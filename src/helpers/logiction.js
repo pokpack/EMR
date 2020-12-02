@@ -1,9 +1,9 @@
 import { decryption } from './crypto'
 export const STATE_ID = {
   ADMIT: 1,
-  EXAMINATION: 2,
+  TREAT: 2,
   DISPENSE: 3,
-  TREAT: 4
+  EXAMINATION: 4,
 }
 export const setState = (emrId, hn, stateId, data) => {
   data.emrId = emrId
@@ -48,9 +48,15 @@ export const dataExaminations = (dataAll = []) => {
 export const dataDispenses = (dataAll = []) => {
   return selectionByStateId(dataAll, STATE_ID.DISPENSE)
 }
+
+export const dataTreats = (dataAll = []) => {
+  return selectionByStateId(dataAll, STATE_ID.TREAT)
+}
+
 export const dataEMRId = (dataAll = [], hn, emrId) => {
   return (formateData(dataAll) || {})[emrId];
 }
+
 export const dataHistory = (dataAll = [], hn) => {
   const selecteDatas = []
   const objFormateData = formateData(dataAll)

@@ -59,13 +59,14 @@ ___________
 ```
 
   POST /api/:hn/admit/:emrId # หน้าแรกรับ
-  POST /api/:hn/examination/:emrId # การรักษา
+  POST /api/:hn/treat/:emrId # การรักษา
   POST /api/:hn/dispense/:emrId # เภสัชจ่ายยา
-  POST /api/:hn/treat/:emrId # หมอ/พยาบาล วินิฉัย
+  POST /api/:hn/examination/:emrId # หมอ/พยาบาล วินิฉัย
 
   GET /api/admits # รายการ admit
-  GET /api/examinations # รายการ การรักษา
+  GET /api/treats # รายการ การรักษา
   GET /api/dispenses # รายการ เภสัชจ่ายยา
+  GET /api/examinations # รายการ วินิฉัย
 
   GET /api/:hn/emr/:emrId # ข้อมูล เข้ารักษา
   GET /api/:hn/history # ข้อมูลประวัติ
