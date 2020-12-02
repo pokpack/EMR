@@ -58,13 +58,13 @@ ___________
 
 ```
 
-  POST /api/:hn/admit/:emrId # พยาบาลสร้างรายการ admit
-  POST /api/:hn/examination/:emrId # หมอตรวจ
+  POST /api/:hn/admit/:emrId # หน้าแรกรับ
+  POST /api/:hn/examination/:emrId # การรักษา
   POST /api/:hn/dispense/:emrId # เภสัชจ่ายยา
-  POST /api/:hn/treat/:emrId # หมอ/พยาบาล รักษา
+  POST /api/:hn/treat/:emrId # หมอ/พยาบาล วินิฉัย
 
   GET /api/admits # รายการ admit
-  GET /api/examinations # รายการ หมอตรวจ
+  GET /api/examinations # รายการ การรักษา
   GET /api/dispenses # รายการ เภสัชจ่ายยา
 
   GET /api/:hn/emr/:emrId # ข้อมูล เข้ารักษา
