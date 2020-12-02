@@ -1,4 +1,6 @@
 version: '3.8'
+networks: 
+  helpcare_app_net:
 services:
   doctor_node:
     environment:
@@ -9,6 +11,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3001:3001"
+    networks: 
+      - helpcare_app_net
   pharmacist_node:
     environment:
       - PEERS=ws://doctor_node:6001,ws://nurse_node:6001,ws://patient_node:6001
@@ -18,6 +22,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3002:3001"
+    networks: 
+      - helpcare_app_net
   nurse_node:
     environment:
       - PEERS=ws://doctor_node:6001,ws://pharmacist_node:6001,ws://patient_node:6001
@@ -27,6 +33,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3003:3001"
+    networks: 
+      - helpcare_app_net
   patient_node:
     environment:
       - PEERS=ws://doctor_node:6001,ws://pharmacist_node:6001,ws://nurse_node:6001
@@ -36,50 +44,84 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3004:3001"
+    networks: 
+      - helpcare_app_net
 
   doctor_web:
+    depends_on:
+      - db
     environment:
       - EMR_API_URL=http://doctor_node:3001
-      - DB_URL=http://db:3306
+      - BASE_URL=http://localhost:5001
+      - DB_URL=db
+      - DB_USER_NAME=dbuser
+      - DB_PASSWORD=userpass
+      - DB_NAME=emr_db
     build:
       context: ./frontend/doctor_web
       dockerfile: Dockerfile
     ports:
       - "5001:80"
+    networks: 
+      - helpcare_app_net
   nurse_web:
+    depends_on:
+      - db
     environment:
       - EMR_API_URL=http://nurse_node:3001
-      - DB_URL=http://db:3306
+      - BASE_URL=http://localhost:5002
+      - DB_URL=db
+      - DB_USER_NAME=dbuser
+      - DB_PASSWORD=userpass
+      - DB_NAME=emr_db
     build:
       context: ./frontend/nurse_web
       dockerfile: Dockerfile
     ports:
       - "5002:80"
+    networks: 
+      - helpcare_app_net
   pharmacist_web:
+    depends_on:
+      - db
     environment:
       - EMR_API_URL=http://pharmacist_node:3001
-      - DB_URL=http://db:3306
+      - BASE_URL=http://localhost:5003
+      - DB_URL=db
+      - DB_USER_NAME=dbuser
+      - DB_PASSWORD=userpass
+      - DB_NAME=emr_db
     build:
       context: ./frontend/pharmacist_web
       dockerfile: Dockerfile
     ports:
       - "5003:80"
+    networks: 
+      - helpcare_app_net
   patient_web:
+    depends_on:
+      - db
     environment:
       - EMR_API_URL=http://patient_node:3001
-      - DB_URL=http://db:3306
+      - BASE_URL=http://localhost:5004
+      - DB_URL=db
+      - DB_USER_NAME=dbuser
+      - DB_PASSWORD=userpass
+      - DB_NAME=emr_db
     build:
       context: ./frontend/patient_web
       dockerfile: Dockerfile
     ports:
       - "5004:80"
+    networks: 
+      - helpcare_app_net
 
   db:
     image: mysql:8.0
-    container_name: appsDB
     restart: always
     ports:
       - '6603:3306'
+    command: --default-authentication-plugin=mysql_native_password
     volumes:
       - ./frontend/db/emr_db.sql:/docker-entrypoint-initdb.d/emr_db.sql
     environment:
@@ -87,6 +129,8 @@ services:
       MYSQL_PASSWORD: userpass
       MYSQL_DATABASE: emr_db
       MYSQL_ROOT_PASSWORD: helloworld
+    networks: 
+      - helpcare_app_net
   phpmyadmin:
     depends_on:
       - db
@@ -94,6 +138,8 @@ services:
     container_name: phpmyadmin
     restart: always
     ports:
-      - '8181:80'
+    - '8181:80'
     environment:
       PMA_HOST: db
+    networks: 
+      - helpcare_app_net

@@ -1,9 +1,9 @@
 # **EMR**
 
-### **Start**
+## **Start**
 
 ```
-git clone https://github.com/pokpack/ERD.git
+git clone --recurse-submodules https://github.com/pokpack/EMR.git
 cd ERD
 npm install
 ```
@@ -50,20 +50,23 @@ ___________
 ### **Docker**
 
 
-``` docker-compose up ```
+``` 
+docker-compose up --build
+```
 ___________
-### **Routes**
+## **Routes**
 
 ```
 
-  POST /api/:hn/admit/:emrId # พยาบาลสร้างรายการ admit
-  POST /api/:hn/examination/:emrId # หมอตรวจ
+  POST /api/:hn/admit/:emrId # หน้าแรกรับ
+  POST /api/:hn/treat/:emrId # การรักษา
   POST /api/:hn/dispense/:emrId # เภสัชจ่ายยา
-  POST /api/:hn/treat/:emrId # หมอ/พยาบาล รักษา
+  POST /api/:hn/examination/:emrId # หมอ/พยาบาล วินิฉัย
 
   GET /api/admits # รายการ admit
-  GET /api/examinations # รายการ หมอตรวจ
+  GET /api/treats # รายการ การรักษา
   GET /api/dispenses # รายการ เภสัชจ่ายยา
+  GET /api/examinations # รายการ วินิฉัย
 
   GET /api/:hn/emr/:emrId # ข้อมูล เข้ารักษา
   GET /api/:hn/history # ข้อมูลประวัติ
@@ -72,10 +75,30 @@ ___________
  # :emrId id เข้ารักษา
  ```
 ___________
-### **Diagram**
+## **Diagram**
 
 
 ![alt tag](doc/diagram.png)
+___________
+## **Test**
+### Server down 
 
+```
+docker-compose -f docker-compose.test.yml up --build
+
+#call api
+curl -H "Authorization: Bearer x]vf4yp0yf" GET http://localhost:8888/EMRs
+
+docker-compose -f docker-compose.test.yml stop first_node
+
+#call api again
+
+docker-compose -f docker-compose.test.yml stop second_node
+docker-compose -f docker-compose.test.yml start first_node
+
+```
+## Submodule
+
+https://github.com/pokpack/frontend
 
 

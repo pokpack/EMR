@@ -1,0 +1,39 @@
+version: '3.8'
+networks: 
+  server_down_test_net:
+services:
+  first_node:
+    environment:
+      - PEERS=ws://second_node:6001,ws://third_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    networks: 
+        - server_down_test_net
+  second_node:
+    environment:
+      - PEERS=ws://first_node:6001,ws://third_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    networks: 
+        - server_down_test_net
+  third_node:
+    environment:
+      - PEERS=ws://first_node:6001,ws://second_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    networks: 
+        - server_down_test_net
+  ngnix_server:
+    image: nginx:1.13.0-alpine
+    volumes: 
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - '8888:8888'
+    networks: 
+        - server_down_test_net
