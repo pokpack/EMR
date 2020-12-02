@@ -3,7 +3,7 @@
 ## **Start**
 
 ```
-git clone https://github.com/pokpack/ERD.git
+git clone --recurse-submodules https://github.com/pokpack/EMR.git
 cd ERD
 npm install
 ```
@@ -98,6 +98,6 @@ docker-compose -f docker-compose.test.yml start first_node
 ```
 ## Submodule
 
-https://github.com/pokpack/EMR_fontend
+https://github.com/pokpack/frontend
 
 
