@@ -54,25 +54,41 @@ ___________
 docker-compose up --build
 ```
 ___________
+## **STATE**
+
+```
+STATE_ID = {
+  ADMIT: 1, # หน้าแรกรับ
+  CURE: 2, # การรักษา
+  DISPENSE: 3, # เภสัชจ่ายยา
+  DIAGNOSE: 4, # หมอ/พยาบาล วินิฉัย
+}
+```
+___________
 ## **Routes**
 
 ```
 
-  POST /api/:hn/admit/:emrId # หน้าแรกรับ
-  POST /api/:hn/treat/:emrId # การรักษา
+  POST /api/:hn/admit/:emrId # แรกรับ
+  POST /api/:hn/cure/:emrId # รักษา
   POST /api/:hn/dispense/:emrId # เภสัชจ่ายยา
-  POST /api/:hn/examination/:emrId # หมอ/พยาบาล วินิฉัย
+  POST /api/:hn/diagnose/:emrId # หมอ/พยาบาล วินิฉัย
 
-  GET /api/admits # รายการ admit
-  GET /api/treats # รายการ การรักษา
-  GET /api/dispenses # รายการ เภสัชจ่ายยา
-  GET /api/examinations # รายการ วินิฉัย
+  GET /api/cures # รายการที่ต้อง รักษา => หมอ ดึง | finished == false
+  GET /api/dispenses # รายการที่ต้อง จ่ายยา => เภสัช ดึง | finished == false
+  GET /api/diagnoses # รายการที่ต้อง วินิฉัย => หมอ/พยาบาล ดึง | finished == false
+
+  GET /api/admiteds # รายการที่อยู่ admit state | ไม่สนใจ finished
+  GET /api/cureds # รายการที่อยู่ cure state | ไม่สนใจ finished
+  GET /api/dispenseds # รายการที่อยู่ dispense state | ไม่สนใจ finished
+  GET /api/diagnoseds # รายการที่อยู่ diagnose state | ไม่สนใจ finished
 
   GET /api/:hn/emr/:emrId # ข้อมูล เข้ารักษา
   GET /api/:hn/history # ข้อมูลประวัติ
 
  # :hn id ผู้ป่วย
  # :emrId id เข้ารักษา
+
  ```
 ___________
 ## **Diagram**
