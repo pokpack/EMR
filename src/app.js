@@ -17,7 +17,7 @@ import {
   dataHistory
 } from './helpers/logiction'
 import crypto from './helpers/crypto'
-import blockchainsLogic, { getGenesisEMRBlock, generateNextBlock, updateBlock, addBlock, responseLatestMsg } from './blockchain/logic'
+import { queryChainLengthMsg, getGenesisEMRBlock, generateNextBlock, updateBlock, addBlock, responseLatestMsg } from './blockchain/logic'
 import middleware, { updateToken } from './middleware'
 import { write, broadcast, initErrorHandler, initMessageHandler } from './socket_servers'
 
@@ -124,7 +124,7 @@ const initConnection = (ws) => { //init
   sockets.push(ws);
   initMessageHandler(ws, EMRBlockchain, sockets);
   initErrorHandler(ws, sockets, (s) => { sockets = s });
-  write(ws, blockchainsLogic.queryChainLengthMsg());
+  write(ws, queryChainLengthMsg());
 };
 
 const connectToPeers = (newPeers) => { //init

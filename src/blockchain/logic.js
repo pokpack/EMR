@@ -2,7 +2,7 @@
 import helpers from '../helpers'
 import { write, broadcast } from '../socket_servers'
 
-const MessageType = {
+export const MessageType = {
   QUERY_LATEST: 0,
   QUERY_ALL: 1,
   RESPONSE_BLOCKCHAIN: 2
@@ -10,9 +10,9 @@ const MessageType = {
 
 const getLatestBlock = (blockchain) => blockchain[blockchain.length - 1];
 
-const queryChainLengthMsg = () => ({ 'type': MessageType.QUERY_LATEST });
+export const queryChainLengthMsg = () => ({ 'type': MessageType.QUERY_LATEST });
 const queryAllMsg = () => ({ 'type': MessageType.QUERY_ALL });
-const responseChainMsg = (blockchain) => ({
+export const responseChainMsg = (blockchain) => ({
   'type': MessageType.RESPONSE_BLOCKCHAIN, 'data': JSON.stringify(blockchain)
 });
 export const responseLatestMsg = (blockchain) => ({
@@ -64,7 +64,7 @@ const replaceChain = (newBlocks, blockchain, sockets) => { //ไว้ replaceCh
 };
 
 
-const handleBlockchainResponse = (message, blockchain, sockets) => {
+export const handleBlockchainResponse = (message, blockchain, sockets) => {
   const receivedBlocks = JSON.parse(message.data).sort((b1, b2) => (b1.index - b2.index));
   const latestBlockReceived = receivedBlocks[receivedBlocks.length - 1];
   const latestBlockHeld = getLatestBlock(blockchain);
@@ -106,7 +106,7 @@ export const generateNextBlock = (blockData, blockchain, Block) => {
   const nextHash = helpers.crypto.calculateHash(nextIndex, previousBlock.hash, nextTimestamp, blockData);
   return new Block(nextIndex, previousBlock.hash, nextTimestamp, blockData, nextHash);
 };
-const getGenesisEMRBlock = () => {
+export const getGenesisEMRBlock = () => {
   return {
     "index": 0,
     "previousHash": `0`,
@@ -116,7 +116,6 @@ const getGenesisEMRBlock = () => {
   };
 };
 
-export { MessageType, getGenesisEMRBlock }
 export default {
   MessageType,
   getLatestBlock,
