@@ -1,4 +1,3 @@
-import logic, { MessageType, getLatestBlock, queryChainLengthMsg, queryAllMsg, responseChainMsg, responseLatestMsg } from './logic'
+import logic from './logic'
 
-export { MessageType }
 export default { logic }
