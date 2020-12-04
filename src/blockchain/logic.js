@@ -89,7 +89,7 @@ export const handleBlockchainResponse = (message, blockchain, sockets, getGenesi
 
 export const updateBlock = (newBlockchain, blockchain) => {
   blockchain = newBlockchain;
-  fsmanager.write_file(blockchain);
+  fsmanager.writeData(blockchain);
   return blockchain;
 };
 

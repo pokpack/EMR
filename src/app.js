@@ -17,6 +17,8 @@ import {
   dataHistory
 } from './helpers/logiction'
 import crypto from './helpers/crypto'
+import fsmanager from './helpers/fsmanager'
+
 import { queryChainLengthMsg, getGenesisEMRBlock, generateNextBlock, updateBlock, addBlock, responseLatestMsg } from './blockchain/logic'
 import middleware, { updateToken } from './middleware'
 import { write, broadcast, initErrorHandler, initMessageHandler } from './socket_servers'
@@ -26,7 +28,7 @@ const http_port = process.env.HTTP_PORT || 3001;
 const p2p_port = process.env.P2P_PORT || 6001;
 const initialPeers = process.env.PEERS ? process.env.PEERS.split(',') : [];
 let sockets = [];
-let EMRBlockchain = [getGenesisEMRBlock()];
+let EMRBlockchain = fsmanager.readData([getGenesisEMRBlock()]);
 
 const initHttpServer = () => {
   const app = express();
