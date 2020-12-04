@@ -1,66 +1,109 @@
-<mxfile host="app.diagrams.net" modified="2020-12-04T07:15:27.881Z" agent="5.0 (Macintosh; Intel Mac OS X 11_0_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36" etag="CrhG6ZLUQUjQ-AoOll1H" version="13.10.4" type="github">
+<mxfile host="app.diagrams.net" modified="2020-12-04T08:14:27.870Z" agent="5.0 (Macintosh; Intel Mac OS X 11_0_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36" etag="9gTtF-qO004BBR506vYX" version="13.10.4" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="946" dy="620" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2404" dy="1033" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="qsxSFnYyLfXHDJvH-c0t-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=blockThin;endFill=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qsxSFnYyLfXHDJvH-c0t-11" target="qsxSFnYyLfXHDJvH-c0t-8">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="400" y="150" as="sourcePoint" />
+            <mxPoint x="-458" y="150" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="qsxSFnYyLfXHDJvH-c0t-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=blockThin;endFill=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qsxSFnYyLfXHDJvH-c0t-8" target="qsxSFnYyLfXHDJvH-c0t-14">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="qsxSFnYyLfXHDJvH-c0t-8" value="&lt;span&gt;กำหนด block เริ่มต้น index ที่ 0&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="310" y="120" width="180" height="70" as="geometry" />
+          <mxGeometry x="-548" y="120" width="180" height="70" as="geometry" />
         </mxCell>
         <mxCell id="qsxSFnYyLfXHDJvH-c0t-11" value="&lt;span style=&quot;font-family: &amp;#34;helvetica&amp;#34;&quot;&gt;เริ่มระบบ&lt;/span&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="350" y="20" width="100" height="60" as="geometry" />
+          <mxGeometry x="-508" y="20" width="100" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="qsxSFnYyLfXHDJvH-c0t-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#330000;strokeWidth=1;endArrow=blockThin;endFill=1;shape=link;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qsxSFnYyLfXHDJvH-c0t-12" target="qsxSFnYyLfXHDJvH-c0t-21">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="qsxSFnYyLfXHDJvH-c0t-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#330000;strokeWidth=1;endArrow=blockThin;endFill=1;shape=link;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qsxSFnYyLfXHDJvH-c0t-50" target="qsxSFnYyLfXHDJvH-c0t-21">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-638" y="425" as="sourcePoint" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="qsxSFnYyLfXHDJvH-c0t-26" value="Api&amp;nbsp;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="qsxSFnYyLfXHDJvH-c0t-25">
           <mxGeometry x="0.2375" y="-1" relative="1" as="geometry">
-            <mxPoint x="-49" y="-1" as="offset" />
+            <mxPoint x="-30.72" y="-1" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="qsxSFnYyLfXHDJvH-c0t-12" value="&lt;span&gt;input ข้อมูล New Transition&lt;/span&gt;" style="html=1;strokeWidth=2;shape=manualInput;whiteSpace=wrap;rounded=1;size=20;arcSize=11;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="10" y="390" width="160" height="70" as="geometry" />
+        <mxCell id="qsxSFnYyLfXHDJvH-c0t-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=blockThin;endFill=1;strokeColor=#330000;strokeWidth=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qsxSFnYyLfXHDJvH-c0t-14" target="qsxSFnYyLfXHDJvH-c0t-37">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="qsxSFnYyLfXHDJvH-c0t-14" value="Blockchain" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.stored_data;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="350" y="230" width="100" height="60" as="geometry" />
+          <mxGeometry x="-508" y="230" width="100" height="60" as="geometry" />
         </mxCell>
         <mxCell id="qsxSFnYyLfXHDJvH-c0t-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=blockThin;endFill=1;strokeColor=#330000;strokeWidth=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qsxSFnYyLfXHDJvH-c0t-21" target="qsxSFnYyLfXHDJvH-c0t-27">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="qsxSFnYyLfXHDJvH-c0t-21" value="ระบบรับข้อมูล New Transition" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="330" y="390" width="170" height="70" as="geometry" />
-        </mxCell>
-        <mxCell id="qsxSFnYyLfXHDJvH-c0t-23" value="" style="endArrow=none;html=1;strokeColor=#330000;strokeWidth=3;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="270" y="800" as="sourcePoint" />
-            <mxPoint x="270" y="10" as="targetPoint" />
-          </mxGeometry>
+          <mxGeometry x="-528" y="390" width="170" height="70" as="geometry" />
         </mxCell>
         <mxCell id="qsxSFnYyLfXHDJvH-c0t-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=blockThin;endFill=1;strokeColor=#330000;strokeWidth=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qsxSFnYyLfXHDJvH-c0t-27" target="qsxSFnYyLfXHDJvH-c0t-31">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="qsxSFnYyLfXHDJvH-c0t-27" value="Encryption ข้อมูล&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="352" y="510" width="126" height="70" as="geometry" />
+          <mxGeometry x="-506" y="510" width="126" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="qsxSFnYyLfXHDJvH-c0t-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#330000;strokeWidth=1;endArrow=none;endFill=0;dashed=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qsxSFnYyLfXHDJvH-c0t-28" target="qsxSFnYyLfXHDJvH-c0t-27">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="qsxSFnYyLfXHDJvH-c0t-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#330000;strokeWidth=1;dashed=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qsxSFnYyLfXHDJvH-c0t-45" target="qsxSFnYyLfXHDJvH-c0t-27">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-188" y="480" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="-188" y="545" />
+            </Array>
+          </mxGeometry>
         </mxCell>
-        <mxCell id="qsxSFnYyLfXHDJvH-c0t-28" value="เข้ารหัสด้วย&amp;nbsp;&lt;span style=&quot;color: rgb(77 , 81 , 86) ; font-family: &amp;#34;arial&amp;#34; , sans-serif ; font-size: 14px ; text-align: left ; background-color: rgb(255 , 255 , 255)&quot;&gt;Advanced Encryption Standard (&lt;/span&gt;&lt;span style=&quot;font-weight: bold ; color: rgb(95 , 99 , 104) ; font-family: &amp;#34;arial&amp;#34; , sans-serif ; font-size: 14px ; text-align: left ; background-color: rgb(255 , 255 , 255)&quot;&gt;AES&lt;/span&gt;&lt;span style=&quot;color: rgb(77 , 81 , 86) ; font-family: &amp;#34;arial&amp;#34; , sans-serif ; font-size: 14px ; text-align: left ; background-color: rgb(255 , 255 , 255)&quot;&gt;)&lt;/span&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="580" y="500" width="180" height="90" as="geometry" />
+        <mxCell id="qsxSFnYyLfXHDJvH-c0t-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;endArrow=blockThin;endFill=1;strokeColor=#330000;strokeWidth=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qsxSFnYyLfXHDJvH-c0t-31" target="qsxSFnYyLfXHDJvH-c0t-14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-548" y="715" />
+              <mxPoint x="-548" y="260" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="qsxSFnYyLfXHDJvH-c0t-31" value="สร้าง New Block จากข้อมูลที่เข้ารหัสแล้ว" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="338" y="630" width="154" height="60" as="geometry" />
+          <mxGeometry x="-520" y="685" width="154" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="qsxSFnYyLfXHDJvH-c0t-33" value="" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.document2;whiteSpace=wrap;size=0.25;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="580" y="620" width="190" height="100" as="geometry" />
+        <mxCell id="qsxSFnYyLfXHDJvH-c0t-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#330000;strokeWidth=1;dashed=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qsxSFnYyLfXHDJvH-c0t-56" target="qsxSFnYyLfXHDJvH-c0t-31">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-208" y="690" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="-208" y="715" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qsxSFnYyLfXHDJvH-c0t-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classicThin;endFill=1;strokeColor=#330000;strokeWidth=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="qsxSFnYyLfXHDJvH-c0t-37" target="qsxSFnYyLfXHDJvH-c0t-41">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qsxSFnYyLfXHDJvH-c0t-55" value="websocket" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];horizontal=1;" vertex="1" connectable="0" parent="qsxSFnYyLfXHDJvH-c0t-54">
+          <mxGeometry x="0.0588" y="-2" relative="1" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qsxSFnYyLfXHDJvH-c0t-37" value="ส่ง Chain ไปยัง Peers" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-338" y="240" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="qsxSFnYyLfXHDJvH-c0t-41" value="Peers" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=offPageConnector;rounded=0;size=0.5;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-88" y="230" width="60" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qsxSFnYyLfXHDJvH-c0t-45" value="&lt;span&gt;เข้ารหัสด้วย&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;color: rgb(77 , 81 , 86) ; font-family: &amp;#34;arial&amp;#34; , sans-serif ; font-size: 14px ; text-align: left ; background-color: rgb(255 , 255 , 255)&quot;&gt;Advanced Encryption Standard (&lt;/span&gt;&lt;span style=&quot;font-weight: bold ; color: rgb(95 , 99 , 104) ; font-family: &amp;#34;arial&amp;#34; , sans-serif ; font-size: 14px ; text-align: left ; background-color: rgb(255 , 255 , 255)&quot;&gt;AES&lt;/span&gt;&lt;span style=&quot;color: rgb(77 , 81 , 86) ; font-family: &amp;#34;arial&amp;#34; , sans-serif ; font-size: 14px ; text-align: left ; background-color: rgb(255 , 255 , 255)&quot;&gt;)&lt;/span&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;size=20;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-278" y="440" width="228" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="qsxSFnYyLfXHDJvH-c0t-50" value="&lt;span&gt;input ข้อมูล New Transition&lt;/span&gt;" style="shape=parallelogram;html=1;strokeWidth=2;perimeter=parallelogramPerimeter;whiteSpace=wrap;rounded=1;arcSize=12;size=0.23;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-808" y="395" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qsxSFnYyLfXHDJvH-c0t-52" value="&lt;span&gt;Webs&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-738" y="365" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="qsxSFnYyLfXHDJvH-c0t-56" value="&lt;div style=&quot;font-size: 11px&quot;&gt;&lt;b&gt;&amp;nbsp; Block : {&lt;/b&gt;&lt;/div&gt;&lt;blockquote style=&quot;margin: 0px 0px 0px 40px ; border: none ; padding: 0px ; font-size: 11px&quot;&gt;&lt;b&gt;index&lt;/b&gt;: ลำดับใน chain,&lt;/blockquote&gt;&lt;blockquote style=&quot;margin: 0px 0px 0px 40px ; border: none ; padding: 0px ; font-size: 11px&quot;&gt;&lt;b&gt;previousHash&lt;/b&gt;: ค่า hash ของ block ก่อนหน้า,&lt;/blockquote&gt;&lt;blockquote style=&quot;margin: 0px 0px 0px 40px ; border: none ; padding: 0px ; font-size: 11px&quot;&gt;&lt;b&gt;timestamp:&amp;nbsp;&lt;/b&gt;เวลาตอนสร้าง block,&lt;/blockquote&gt;&lt;blockquote style=&quot;margin: 0px 0px 0px 40px ; border: none ; padding: 0px ; font-size: 11px&quot;&gt;&lt;b&gt;data:&amp;nbsp;&lt;/b&gt;ข้อมูลที่เข้ารหัสแล้ว,&lt;/blockquote&gt;&lt;blockquote style=&quot;margin: 0px 0px 0px 40px ; border: none ; padding: 0px ; font-size: 11px&quot;&gt;&lt;b&gt;hash:&amp;nbsp;&lt;/b&gt;SHA256(index,&amp;nbsp;previousHash, timestamp, data)&amp;nbsp;&lt;/blockquote&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;&lt;div&gt;&lt;b&gt;&amp;nbsp; &amp;nbsp;}&lt;/b&gt;&lt;/div&gt;&lt;/font&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;align=left;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-278" y="570" width="260" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="qsxSFnYyLfXHDJvH-c0t-58" value="" style="endArrow=none;html=1;strokeColor=#330000;strokeWidth=3;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-558" y="780" as="sourcePoint" />
+            <mxPoint x="-558" y="20" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
