@@ -1,5 +1,5 @@
 
-import helpers from '../helpers'
+import { fsmanager, crypto } from '../helpers'
 import { write, broadcast } from '../socket_servers'
 
 export const MessageType = {
@@ -28,9 +28,9 @@ const isValidNewBlock = (newBlock, previousBlock) => {
   } else if (previousBlock.hash !== newBlock.previousHash) {
     console.log('invalid previoushash');
     return false;
-  } else if (helpers.crypto.calculateHashForBlock(newBlock) !== newBlock.hash) {
-    console.log(typeof (newBlock.hash) + ' ' + typeof helpers.crypto.calculateHashForBlock(newBlock));
-    console.log('invalid hash: ' + helpers.crypto.calculateHashForBlock(newBlock) + ' ' + newBlock.hash);
+  } else if (crypto.calculateHashForBlock(newBlock) !== newBlock.hash) {
+    console.log(typeof (newBlock.hash) + ' ' + typeof crypto.calculateHashForBlock(newBlock));
+    console.log('invalid hash: ' + crypto.calculateHashForBlock(newBlock) + ' ' + newBlock.hash);
     return false;
   }
   return true;
@@ -89,6 +89,7 @@ export const handleBlockchainResponse = (message, blockchain, sockets) => {
 
 export const updateBlock = (newBlockchain, blockchain) => {
   blockchain = newBlockchain;
+  fsmanager.write_file(blockchain);
   return blockchain;
 };
 
@@ -103,7 +104,7 @@ export const generateNextBlock = (blockData, blockchain, Block) => {
   const previousBlock = getLatestBlock(blockchain);
   const nextIndex = previousBlock.index + 1;
   const nextTimestamp = Date.now();
-  const nextHash = helpers.crypto.calculateHash(nextIndex, previousBlock.hash, nextTimestamp, blockData);
+  const nextHash = crypto.calculateHash(nextIndex, previousBlock.hash, nextTimestamp, blockData);
   return new Block(nextIndex, previousBlock.hash, nextTimestamp, blockData, nextHash);
 };
 export const getGenesisEMRBlock = () => {

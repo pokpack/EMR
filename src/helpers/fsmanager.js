@@ -11,5 +11,5 @@ export const write_file = (arr) => {
   });
 
 }
-export { }
-export default {};
+
+export default { write_file };

@@ -3,4 +3,5 @@ npm-debug.log
 .idea
 yarn.lock
 package-lock.json
+blockchain.json
 dist
