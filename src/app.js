@@ -122,7 +122,7 @@ const initP2PServer = () => { //init
 };
 const initConnection = (ws) => { //init
   sockets.push(ws);
-  initMessageHandler(ws, EMRBlockchain, sockets);
+  initMessageHandler(ws, EMRBlockchain, sockets, getGenesisEMRBlock);
   initErrorHandler(ws, sockets, (s) => { sockets = s });
   write(ws, queryChainLengthMsg());
 };

@@ -37,8 +37,8 @@ const isValidNewBlock = (newBlock, previousBlock) => {
 };
 
 
-const isValidEMRChain = (blockchainToValidate) => {
-  if (JSON.stringify(blockchainToValidate[0]) !== JSON.stringify(getGenesisEMRBlock())) {
+const isValidChain = (blockchainToValidate, getGenesisBlock) => {
+  if (JSON.stringify(blockchainToValidate[0]) !== JSON.stringify(getGenesisBlock())) {
     return false;
   }
   const tempBlocks = [blockchainToValidate[0]];
@@ -52,8 +52,8 @@ const isValidEMRChain = (blockchainToValidate) => {
   return true;
 };
 
-const replaceChain = (newBlocks, blockchain, sockets) => { //ไว้ replaceChain กับ node อื่นๆ
-  if (isValidEMRChain(newBlocks) && newBlocks.length > blockchain.length) {
+const replaceChain = (newBlocks, blockchain, sockets, getGenesisBlock) => { //ไว้ replaceChain กับ node อื่นๆ
+  if (isValidChain(newBlocks, getGenesisBlock) && newBlocks.length > blockchain.length) {
     console.log('Received blockchain is valid. Replacing current blockchain with received blockchain');
     blockchain = newBlocks;
     broadcast(sockets, responseLatestMsg(blockchain));
@@ -64,7 +64,7 @@ const replaceChain = (newBlocks, blockchain, sockets) => { //ไว้ replaceCh
 };
 
 
-export const handleBlockchainResponse = (message, blockchain, sockets) => {
+export const handleBlockchainResponse = (message, blockchain, sockets, getGenesisBlock) => {
   const receivedBlocks = JSON.parse(message.data).sort((b1, b2) => (b1.index - b2.index));
   const latestBlockReceived = receivedBlocks[receivedBlocks.length - 1];
   const latestBlockHeld = getLatestBlock(blockchain);
@@ -79,7 +79,7 @@ export const handleBlockchainResponse = (message, blockchain, sockets) => {
       broadcast(sockets, queryAllMsg());
     } else {
       console.log("Received blockchain is longer than current blockchain");
-      blockchain = replaceChain(receivedBlocks, blockchain, sockets);
+      blockchain = replaceChain(receivedBlocks, blockchain, sockets, getGenesisBlock);
     }
   } else {
     console.log('received blockchain is not longer than current blockchain. Do nothing');
