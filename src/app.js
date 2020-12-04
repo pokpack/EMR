@@ -17,7 +17,7 @@ import {
   dataHistory
 } from './helpers/logiction'
 import crypto from './helpers/crypto'
-import blockchainsLogic, { getGenesisEMRBlock } from './blockchain/logic'
+import blockchainsLogic, { getGenesisEMRBlock, generateNextBlock, updateBlock, addBlock, responseLatestMsg } from './blockchain/logic'
 import middleware, { updateToken } from './middleware'
 import { write, broadcast, initErrorHandler, initMessageHandler } from './socket_servers'
 
@@ -33,31 +33,35 @@ const initHttpServer = () => {
   app.use(bodyParser.json());
 
   app.post('/api/:hn/admit/:emrId', middleware, (req, res) => {
-    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(setState(req.params.emrId, req.params.hn, STATE_ID.ADMIT, req.body)), EMRBlockchain, EMRBlock);
-    blockchainsLogic.updateBlock(blockchainsLogic.addBlock(newBlock, EMRBlockchain), EMRBlockchain)
-    broadcast(sockets, blockchainsLogic.responseLatestMsg(EMRBlockchain));
+    const { body, params: { emrId, hn } } = req;
+    const newBlock = generateNextBlock(crypto.encryption(setState(emrId, hn, STATE_ID.ADMIT, body)), EMRBlockchain, EMRBlock);
+    updateBlock(addBlock(newBlock, EMRBlockchain), EMRBlockchain)
+    broadcast(sockets, responseLatestMsg(EMRBlockchain));
     res.send(JSON.stringify(newBlock));
   });
 
   app.post('/api/:hn/cure/:emrId', middleware, (req, res) => {
-    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(setState(req.params.emrId, req.params.hn, STATE_ID.CURE, req.body)), EMRBlockchain, EMRBlock);
-    blockchainsLogic.updateBlock(blockchainsLogic.addBlock(newBlock, EMRBlockchain), EMRBlockchain)
-    broadcast(sockets, blockchainsLogic.responseLatestMsg(EMRBlockchain));
+    const { body, params: { emrId, hn } } = req;
+    const newBlock = generateNextBlock(crypto.encryption(setState(emrId, hn, STATE_ID.CURE, body)), EMRBlockchain, EMRBlock);
+    updateBlock(addBlock(newBlock, EMRBlockchain), EMRBlockchain)
+    broadcast(sockets, responseLatestMsg(EMRBlockchain));
     res.send(JSON.stringify(newBlock));
   });
 
   app.post('/api/:hn/dispense/:emrId', middleware, (req, res) => {
-    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(setState(req.params.emrId, req.params.hn, STATE_ID.DISPENSE, req.body)), EMRBlockchain, EMRBlock);
-    blockchainsLogic.updateBlock(blockchainsLogic.addBlock(newBlock, EMRBlockchain), EMRBlockchain)
-    broadcast(sockets, blockchainsLogic.responseLatestMsg(EMRBlockchain));
+    const { body, params: { emrId, hn } } = req;
+    const newBlock = generateNextBlock(crypto.encryption(setState(emrId, hn, STATE_ID.DISPENSE, body)), EMRBlockchain, EMRBlock);
+    updateBlock(addBlock(newBlock, EMRBlockchain), EMRBlockchain)
+    broadcast(sockets, responseLatestMsg(EMRBlockchain));
     res.send(JSON.stringify(newBlock));
   });
 
 
   app.post('/api/:hn/diagnose/:emrId', middleware, (req, res) => {
-    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(setState(req.params.emrId, req.params.hn, STATE_ID.DIAGNOSE, req.body)), EMRBlockchain, EMRBlock);
-    blockchainsLogic.updateBlock(blockchainsLogic.addBlock(newBlock, EMRBlockchain), EMRBlockchain)
-    broadcast(sockets, blockchainsLogic.responseLatestMsg(EMRBlockchain));
+    const { body, params: { emrId, hn } } = req;
+    const newBlock = generateNextBlock(crypto.encryption(setState(emrId, hn, STATE_ID.DIAGNOSE, body)), EMRBlockchain, EMRBlock);
+    updateBlock(addBlock(newBlock, EMRBlockchain), EMRBlockchain)
+    broadcast(sockets, responseLatestMsg(EMRBlockchain));
     res.send(JSON.stringify(newBlock));
   });
 
@@ -77,18 +81,18 @@ const initHttpServer = () => {
 
   app.get('/EMRs', middleware, (req, res) => res.send(JSON.stringify(EMRBlockchain)));
   app.get('/EMRs/:index', middleware, (req, res) => {
-    const b = EMRBlockchain[req.params.index]
-    res.send(JSON.stringify(new EMRBlock(b['index'], b['previousHash'], b['timestamp'], b['data'], b['hash'])))
+    const block = EMRBlockchain[req.params.index]
+    res.send(JSON.stringify(new EMRBlock(block['index'], block['previousHash'], block['timestamp'], block['data'], block['hash'])))
   });
   app.post('/mineEMR', middleware, (req, res) => {
-    const newBlock = blockchainsLogic.generateNextBlock(crypto.encryption(req.body.data), EMRBlockchain, EMRBlock);
-    blockchainsLogic.updateBlock(blockchainsLogic.addBlock(newBlock, EMRBlockchain), EMRBlockchain)
-    broadcast(sockets, blockchainsLogic.responseLatestMsg(EMRBlockchain));
+    const newBlock = generateNextBlock(crypto.encryption(req.body.data), EMRBlockchain, EMRBlock);
+    updateBlock(addBlock(newBlock, EMRBlockchain), EMRBlockchain)
+    broadcast(sockets, responseLatestMsg(EMRBlockchain));
     res.send(JSON.stringify(newBlock));
   });
   app.get('/EMRS/:index/data', (req, res) => {
-    const b = EMRBlockchain[req.params.index]
-    res.send(new EMRBlock(b['index'], b['previousHash'], b['timestamp'], b['data'], b['hash']).getData())
+    const block = EMRBlockchain[req.params.index]
+    res.send(new EMRBlock(block['index'], block['previousHash'], block['timestamp'], block['data'], block['hash']).getData())
   });
   app.get('/peers', middleware, (req, res) => {
     res.send(sockets.map(s => s._socket.remoteAddress + ':' + s._socket.remotePort));
@@ -118,7 +122,7 @@ const initP2PServer = () => { //init
 };
 const initConnection = (ws) => { //init
   sockets.push(ws);
-  initMessageHandler(ws, EMRBlockchain, sockets, getGenesisEMRBlock);
+  initMessageHandler(ws, EMRBlockchain, sockets);
   initErrorHandler(ws, sockets, (s) => { sockets = s });
   write(ws, blockchainsLogic.queryChainLengthMsg());
 };

@@ -1,5 +1,5 @@
 import { checkdifference } from '../helpers'
-import blockchainsLogic, { MessageType } from '../blockchain/logic'
+import blockchainsLogic, { MessageType, updateBlock } from '../blockchain/logic'
 const write = (ws, message) => ws.send(JSON.stringify(message));
 const broadcast = (sockets, message) => sockets.forEach(ws => write(ws, message));
 const initErrorHandler = (ws, sockets, updateSockets) => {
@@ -12,7 +12,7 @@ const initErrorHandler = (ws, sockets, updateSockets) => {
   updateSockets(sockets)
 };
 
-const initMessageHandler = (ws, blockchain, sockets, getGenesisBlock) => { //init
+const initMessageHandler = (ws, blockchain, sockets) => { //init
   ws.on('message', (data) => {
     const message = JSON.parse(data);
     console.log('Received message' + JSON.stringify(message));
@@ -28,7 +28,7 @@ const initMessageHandler = (ws, blockchain, sockets, getGenesisBlock) => { //ini
         console.log(Buffer.byteLength(data, 'utf8'), 'byte') // for test
         console.log("=====================================") // for test
         checkdifference(new Date(JSON.parse(message.data)[0].timestamp)); // for test
-        blockchainsLogic.updateBlock(blockchainsLogic.handleBlockchainResponse(message, blockchain, sockets, getGenesisBlock), blockchain);
+        updateBlock(blockchainsLogic.handleBlockchainResponse(message, blockchain, sockets), blockchain);
         break;
     }
   });
