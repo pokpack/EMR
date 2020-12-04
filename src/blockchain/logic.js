@@ -86,6 +86,11 @@ const handleBlockchainResponse = (message, blockchain, sockets, getGenesisBlock)
   return blockchain;
 };
 
+const updateBlock = (newBlockchain, blockchain) => {
+  blockchain = newBlockchain;
+  return blockchain;
+};
+
 const addBlock = (newBlock, blockchain) => {
   if (isValidNewBlock(newBlock, getLatestBlock(blockchain))) {
     blockchain.push(newBlock);
@@ -123,5 +128,6 @@ export default {
   replaceChain,
   handleBlockchainResponse,
   addBlock,
+  updateBlock,
   generateNextBlock
 };

@@ -1,5 +1,5 @@
 import crypto from './crypto'
-
+import fsmanager from './fsmanager'
 const timeDifference = (date1, date2) => {
   var difference = date1.getTime() - date2.getTime();
 
@@ -28,5 +28,5 @@ const checkdifference = (sent_date) => {
   timeDifference(new Date(Date.now()), sent_date)
 }
 
-export { crypto, timeDifference, checkdifference }
-export default { crypto, timeDifference, checkdifference }
+export { crypto, timeDifference, checkdifference, fsmanager }
+export default { crypto, timeDifference, checkdifference, fsmanager }
