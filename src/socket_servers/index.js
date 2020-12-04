@@ -12,7 +12,7 @@ const initErrorHandler = (ws, sockets, updateSockets) => {
   updateSockets(sockets)
 };
 
-const initMessageHandler = (ws, blockchain, sockets, getGenesisBlock) => { //init
+const initMessageHandler = (ws, blockchain, sockets, getGenesisBlock, updateBlockchain) => { //init
   ws.on('message', (data) => {
     const message = JSON.parse(data);
     console.log('Received message' + JSON.stringify(message));
@@ -26,7 +26,7 @@ const initMessageHandler = (ws, blockchain, sockets, getGenesisBlock) => { //ini
       case MessageType.RESPONSE_BLOCKCHAIN:
         checkDataSize(data); // for test
         checkdifference(new Date(JSON.parse(message.data)[0].timestamp)); // for test
-        updateBlock(handleBlockchainResponse(message, blockchain, sockets, getGenesisBlock), blockchain);
+        updateBlockchain(handleBlockchainResponse(message, blockchain, sockets, getGenesisBlock));
         break;
     }
   });

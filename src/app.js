@@ -120,9 +120,16 @@ const initP2PServer = () => { //init
   console.log('listening websocket p2p port on: ' + p2p_port);
 
 };
+
 const initConnection = (ws) => { //init
   sockets.push(ws);
-  initMessageHandler(ws, EMRBlockchain, sockets, getGenesisEMRBlock);
+  initMessageHandler(
+    ws,
+    EMRBlockchain,
+    sockets,
+    getGenesisEMRBlock,
+    b => { EMRBlockchain = updateBlock(b, EMRBlockchain) }
+  );
   initErrorHandler(ws, sockets, (s) => { sockets = s });
   write(ws, queryChainLengthMsg());
 };
