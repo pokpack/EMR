@@ -24,9 +24,14 @@ const timeDifference = (date1, date2) => {
   console.log("=======================================")
 }
 
-const checkdifference = (sent_date) => {
+export const checkDataSize = data => {
+  console.log("===========MessageByteSize===========")
+  console.log(Buffer.byteLength(data, 'utf8'), 'byte')
+  console.log("=====================================")
+}
+export const checkdifference = sent_date => {
   timeDifference(new Date(Date.now()), sent_date)
 }
 
-export { crypto, timeDifference, checkdifference, fsmanager }
-export default { crypto, timeDifference, checkdifference, fsmanager }
+export { crypto, timeDifference, fsmanager }
+export default { crypto, timeDifference, checkdifference, fsmanager, checkDataSize }
