@@ -13,14 +13,12 @@ export const writeData = arr => {
   });
 }
 export const readData = (defaultData) => {
-
   try {
     const rawdata = fs.readFileSync(fileInfo);
     console.log("read data", rawdata)
     return JSON.parse(rawdata);
   }
   catch (err) {
-    console.log("can't read data", err)
     return defaultData
   }
 

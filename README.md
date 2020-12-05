@@ -86,6 +86,7 @@ ___________
   GET /api/:hn/emr/:emrId # ข้อมูล เข้ารักษา
   GET /api/:hn/history # ข้อมูลประวัติ
 
+  GET /api/count จำนวน case
  # :hn id ผู้ป่วย
  # :emrId id เข้ารักษา
 

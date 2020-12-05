@@ -5,6 +5,7 @@ import models from './models'
 import {
   STATE_ID,
   setState,
+  emrCount,
   dataAdmits,
   dataCures,
   dataDispenses,
@@ -66,6 +67,9 @@ const initHttpServer = () => {
     broadcast(sockets, responseLatestMsg(EMRBlockchain));
     res.send(JSON.stringify(newBlock));
   });
+
+
+  app.get('/api/count', middleware, (req, res) => res.send(JSON.stringify(emrCount(EMRBlockchain))));
 
   app.get('/api/admits', middleware, (req, res) => res.send(JSON.stringify(dataAdmits(EMRBlockchain))));
   app.get('/api/cures', middleware, (req, res) => res.send(JSON.stringify(dataCures(EMRBlockchain))));

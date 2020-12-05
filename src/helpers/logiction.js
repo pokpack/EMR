@@ -25,7 +25,6 @@ export const formateData = (dataAll = []) => {
 }
 
 export const selectionByStateId = (dataAll, stateId, finished_state) => {
-
   const selecteDatas = []
   const objFormateData = formateData(dataAll)
   Object.keys(objFormateData).forEach(key => {
@@ -53,6 +52,39 @@ export const dataDiagnoseds = (dataAll = []) => {
   return selectionByStateId(dataAll, STATE_ID.DIAGNOSE, true)
 }
 
+export const emrCount = (dataAll) => {
+  const objFormateData = formateData(dataAll)
+  const emrCount = {
+    admit: 0, // หน้าแรกรับ
+    cure: 0, // การรักษา
+    dispense: 0, // เภสัชจ่ายยา
+    diagnose: 0, // หมอ/พยาบาล วินิฉัย
+    total: 0
+  }
+  Object.keys(objFormateData).forEach(key => {
+    const obj = objFormateData[key]
+    switch (obj.stateId) {
+      case STATE_ID.ADMIT:
+        emrCount.admit++
+        emrCount.total++
+        break;
+      case STATE_ID.CURE:
+        emrCount.cure++
+        emrCount.total++
+        break;
+      case STATE_ID.DISPENSE:
+        emrCount.dispense++
+        emrCount.total++
+        break;
+      case STATE_ID.DIAGNOSE:
+        emrCount.diagnose++
+        emrCount.total++
+        break;
+    }
+    obj.stateId
+  })
+  return emrCount;
+}
 
 export const dataAdmits = (dataAll = []) => {
   return []
