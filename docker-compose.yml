@@ -9,8 +9,6 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    ports:
-      - "3001:3001"
     networks: 
       - helpcare_app_net
   pharmacist_node:
@@ -20,8 +18,6 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    ports:
-      - "3002:3001"
     networks: 
       - helpcare_app_net
   nurse_node:
@@ -31,8 +27,6 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    ports:
-      - "3003:3001"
     networks: 
       - helpcare_app_net
   patient_node:
@@ -42,8 +36,6 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    ports:
-      - "3004:3001"
     networks: 
       - helpcare_app_net
 
@@ -119,8 +111,6 @@ services:
   db:
     image: mysql:8.0
     restart: always
-    ports:
-      - '6603:3306'
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - ./frontend/db/emr_db.sql:/docker-entrypoint-initdb.d/emr_db.sql
