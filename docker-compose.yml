@@ -2,36 +2,83 @@ version: '3.8'
 networks: 
   helpcare_app_net:
 services:
-  doctor_node:
+
+
+
+  doctor_node1:
+    container_name: doctor_node1
     environment:
-      - PEERS=ws://nurse_node:6001,ws://pharmacist_node:6001,ws://patient_node:6001
+      - PEERS=ws://pharmacist_node1:6001,ws://nurse_node1:6001,ws://patient_node1:6001,ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
       dockerfile: Dockerfile
     networks: 
       - helpcare_app_net
-  pharmacist_node:
+  pharmacist_node1:
+    container_name: pharmacist_node1
     environment:
-      - PEERS=ws://doctor_node:6001,ws://nurse_node:6001,ws://patient_node:6001
+      - PEERS=ws://doctor_node1:6001,ws://nurse_node1:6001,ws://patient_node1:6001,ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
       dockerfile: Dockerfile
     networks: 
       - helpcare_app_net
-  nurse_node:
+  nurse_node1:
+    container_name: nurse_node1
     environment:
-      - PEERS=ws://doctor_node:6001,ws://pharmacist_node:6001,ws://patient_node:6001
+      - PEERS=ws://doctor_node1:6001,ws://pharmacist_node1:6001,ws://patient_node1:6001,ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
       dockerfile: Dockerfile
     networks: 
       - helpcare_app_net
-  patient_node:
+  patient_node1:
+    container_name: patient_node1
     environment:
-      - PEERS=ws://doctor_node:6001,ws://pharmacist_node:6001,ws://nurse_node:6001
+      - PEERS=ws://doctor_node1:6001,ws://pharmacist_node1:6001,ws://nurse_node1:6001,ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    networks: 
+      - helpcare_app_net
+  doctor_node2:
+    container_name: doctor_node2
+    environment:
+      - PEERS=ws://doctor_node1:6001,ws://pharmacist_node1:6001,ws://nurse_node1:6001,ws://patient_node1:6001,ws://pharmacist_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    networks: 
+      - helpcare_app_net
+  pharmacist_node2:
+    container_name: pharmacist_node2
+    environment:
+      - PEERS=ws://doctor_node1:6001,ws://pharmacist_node1:6001,ws://nurse_node1:6001,ws://patient_node1:6001,ws://doctor_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    networks: 
+      - helpcare_app_net
+  nurse_node2:
+    container_name: nurse_node2
+    environment:
+      - PEERS=ws://doctor_node1:6001,ws://pharmacist_node1:6001,ws://nurse_node1:6001,ws://patient_node1:6001,ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://patient_node2:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    networks: 
+      - helpcare_app_net
+  patient_node2:
+    container_name: patient_node2
+    environment:
+      - PEERS=ws://doctor_node1:6001,ws://pharmacist_node1:6001,ws://nurse_node1:6001,ws://patient_node1:6001,ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://nurse_node2:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
@@ -39,76 +86,49 @@ services:
     networks: 
       - helpcare_app_net
 
-  doctor_web:
-    depends_on:
-      - db
-    environment:
-      - EMR_API_URL=http://doctor_node:3001
-      - BASE_URL=http://localhost:5001
-      - DB_URL=db
-      - DB_USER_NAME=dbuser
-      - DB_PASSWORD=userpass
-      - DB_NAME=emr_db
-    build:
-      context: ./frontend/doctor_web
-      dockerfile: Dockerfile
+
+
+  doctor_load_balance:
+    container_name: doctor_load_balance
+    image: nginx:1.13.0-alpine
+    volumes: 
+      - ./nginx/doctor_nginx.conf:/etc/nginx/nginx.conf
     ports:
-      - "5001:80"
+      - '8881:8888'
     networks: 
-      - helpcare_app_net
-  nurse_web:
-    depends_on:
-      - db
-    environment:
-      - EMR_API_URL=http://nurse_node:3001
-      - BASE_URL=http://localhost:5002
-      - DB_URL=db
-      - DB_USER_NAME=dbuser
-      - DB_PASSWORD=userpass
-      - DB_NAME=emr_db
-    build:
-      context: ./frontend/nurse_web
-      dockerfile: Dockerfile
+        - helpcare_app_net
+  pharmacist_load_balance:
+    container_name: pharmacist_load_balance
+    image: nginx:1.13.0-alpine
+    volumes: 
+      - ./nginx/pharmacist_nginx.conf:/etc/nginx/nginx.conf
     ports:
-      - "5002:80"
+      - '8882:8888'
     networks: 
-      - helpcare_app_net
-  pharmacist_web:
-    depends_on:
-      - db
-    environment:
-      - EMR_API_URL=http://pharmacist_node:3001
-      - BASE_URL=http://localhost:5003
-      - DB_URL=db
-      - DB_USER_NAME=dbuser
-      - DB_PASSWORD=userpass
-      - DB_NAME=emr_db
-    build:
-      context: ./frontend/pharmacist_web
-      dockerfile: Dockerfile
+        - helpcare_app_net
+  nurse_load_balance:
+    container_name: nurse_load_balance
+    image: nginx:1.13.0-alpine
+    volumes: 
+      - ./nginx/nurse_nginx.conf:/etc/nginx/nginx.conf
     ports:
-      - "5003:80"
+      - '8883:8888'
     networks: 
-      - helpcare_app_net
-  patient_web:
-    depends_on:
-      - db
-    environment:
-      - EMR_API_URL=http://patient_node:3001
-      - BASE_URL=http://localhost:5004
-      - DB_URL=db
-      - DB_USER_NAME=dbuser
-      - DB_PASSWORD=userpass
-      - DB_NAME=emr_db
-    build:
-      context: ./frontend/patient_web
-      dockerfile: Dockerfile
+        - helpcare_app_net
+  patient_load_balance:
+    container_name: patient_load_balance
+    image: nginx:1.13.0-alpine
+    volumes: 
+      - ./nginx/patient_nginx.conf:/etc/nginx/nginx.conf
     ports:
-      - "5004:80"
+      - '8884:8888'
     networks: 
-      - helpcare_app_net
+        - helpcare_app_net
+
+
 
   db:
+    container_name: db
     image: mysql:8.0
     restart: always
     command: --default-authentication-plugin=mysql_native_password
@@ -131,5 +151,80 @@ services:
     - '8181:80'
     environment:
       PMA_HOST: db
+    networks: 
+      - helpcare_app_net
+
+
+
+  doctor_web:
+    container_name: doctor_web
+    depends_on:
+      - db
+    environment:
+      - EMR_API_URL=http://localhost:8881
+      - BASE_URL=http://localhost:5001
+      - DB_URL=db
+      - DB_USER_NAME=dbuser
+      - DB_PASSWORD=userpass
+      - DB_NAME=emr_db
+    build:
+      context: ./frontend/doctor_web
+      dockerfile: Dockerfile
+    ports:
+      - "5001:80"
+    networks: 
+      - helpcare_app_net
+  pharmacist_web:
+    container_name: pharmacist_web
+    depends_on:
+      - db
+    environment:
+      - EMR_API_URL=http://localhost:8882
+      - BASE_URL=http://localhost:5002
+      - DB_URL=db
+      - DB_USER_NAME=dbuser
+      - DB_PASSWORD=userpass
+      - DB_NAME=emr_db
+    build:
+      context: ./frontend/pharmacist_web
+      dockerfile: Dockerfile
+    ports:
+      - "5002:80"
+    networks: 
+      - helpcare_app_net
+  nurse_web:
+    container_name: nurse_web
+    depends_on:
+      - db
+    environment:
+      - EMR_API_URL=http://localhost:8883
+      - BASE_URL=http://localhost:5003
+      - DB_URL=db
+      - DB_USER_NAME=dbuser
+      - DB_PASSWORD=userpass
+      - DB_NAME=emr_db
+    build:
+      context: ./frontend/nurse_web
+      dockerfile: Dockerfile
+    ports:
+      - "5003:80"
+    networks: 
+      - helpcare_app_net
+  patient_web:
+    container_name: patient_web
+    depends_on:
+      - db
+    environment:
+      - EMR_API_URL=http://localhost:8884
+      - BASE_URL=http://localhost:5004
+      - DB_URL=db
+      - DB_USER_NAME=dbuser
+      - DB_PASSWORD=userpass
+      - DB_NAME=emr_db
+    build:
+      context: ./frontend/patient_web
+      dockerfile: Dockerfile
+    ports:
+      - "5004:80"
     networks: 
       - helpcare_app_net
