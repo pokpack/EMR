@@ -1,5 +1,5 @@
 
-import { fsmanager, crypto } from '../helpers'
+import { fsmanager, crypto, checkdifference } from '../helpers'
 import { write, broadcast } from '../socket_servers'
 
 export const MessageType = {
@@ -72,6 +72,7 @@ export const handleBlockchainResponse = (message, blockchain, sockets, getGenesi
     console.log('blockchain possibly behind. We got: ' + latestBlockHeld.index + ' Peer got: ' + latestBlockReceived.index);
     if (latestBlockHeld.hash === latestBlockReceived.previousHash) {
       console.log("We can append the received block to our chain");
+      checkdifference(new Date(latestBlockReceived.timestamp)); // for test
       blockchain.push(latestBlockReceived);
       broadcast(sockets, responseLatestMsg(blockchain));
     } else if (receivedBlocks.length === 1) {
