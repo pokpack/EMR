@@ -161,7 +161,7 @@ services:
     depends_on:
       - db
     environment:
-      - EMR_API_URL=http://localhost:8881
+      - EMR_API_URL=doctor_load_balance:8888
       - BASE_URL=http://localhost:5001
       - DB_URL=db
       - DB_USER_NAME=dbuser
@@ -179,7 +179,7 @@ services:
     depends_on:
       - db
     environment:
-      - EMR_API_URL=http://localhost:8882
+      - EMR_API_URL=pharmacist_load_balance:8888
       - BASE_URL=http://localhost:5002
       - DB_URL=db
       - DB_USER_NAME=dbuser
@@ -197,7 +197,7 @@ services:
     depends_on:
       - db
     environment:
-      - EMR_API_URL=http://localhost:8883
+      - EMR_API_URL=nurse_load_balance:8888
       - BASE_URL=http://localhost:5003
       - DB_URL=db
       - DB_USER_NAME=dbuser
@@ -215,7 +215,7 @@ services:
     depends_on:
       - db
     environment:
-      - EMR_API_URL=http://localhost:8884
+      - EMR_API_URL=patient_load_balance:8888
       - BASE_URL=http://localhost:5004
       - DB_URL=db
       - DB_USER_NAME=dbuser
