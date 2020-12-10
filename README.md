@@ -114,6 +114,16 @@ docker-compose -f docker-compose.test.yml stop second_node
 docker-compose -f docker-compose.test.yml start first_node
 
 ```
+
+### SSH
+
+```
+docker ps // ดู container ที่มีอยู่
+docker exec –it [CONTAINER ID ที่จะเข้า] /bin/bash // เข้าไปใน container นั้นๆ
+ls  // หาว่ามี blockchain.json มั้ย?
+cat blockchain.json // ดูข้อมูลใน blockchain.json
+
+```
 ## Submodule
 
 https://github.com/pokpack/frontend
