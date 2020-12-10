@@ -1,0 +1,125 @@
+version: '2'
+services:
+  1_node:
+    environment:
+      - PEERS=ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001,ws://13_node:6001,ws://14_node:6001,ws://15_node:6001,ws://16_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+  2_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001,ws://13_node:6001,ws://14_node:6001,ws://15_node:6001,ws://16_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+  3_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001,ws://13_node:6001,ws://14_node:6001,ws://15_node:6001,ws://16_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+  4_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001,ws://13_node:6001,ws://14_node:6001,ws://15_node:6001,ws://16_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+
+
+
+
+  5_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001,ws://13_node:6001,ws://14_node:6001,ws://15_node:6001,ws://16_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+  6_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001,ws://13_node:6001,ws://14_node:6001,ws://15_node:6001,ws://16_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+  7_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001,ws://13_node:6001,ws://14_node:6001,ws://15_node:6001,ws://16_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+  8_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001,ws://13_node:6001,ws://14_node:6001,ws://15_node:6001,ws://16_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+
+
+  9_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001,ws://13_node:6001,ws://14_node:6001,ws://15_node:6001,ws://16_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+  10_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://11_node:6001,ws://12_node:6001,ws://13_node:6001,ws://14_node:6001,ws://15_node:6001,ws://16_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+  11_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://12_node:6001,ws://13_node:6001,ws://14_node:6001,ws://15_node:6001,ws://16_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+  12_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://13_node:6001,ws://14_node:6001,ws://15_node:6001,ws://16_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+
+
+      
+  13_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001,ws://14_node:6001,ws://15_node:6001,ws://16_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+  14_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001,ws://13_node:6001,ws://15_node:6001,ws://16_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+  15_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001,ws://13_node:6001,ws://14_node:6001,ws://16_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+  16_node:
+    environment:
+    - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001,ws://13_node:6001,ws://14_node:6001,ws://15_node:6001
+    - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
