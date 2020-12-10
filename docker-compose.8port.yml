@@ -1,0 +1,83 @@
+version: '2'
+services:
+  1_node:
+    environment:
+      - PEERS=ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+  2_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3001"
+  3_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3001"
+  4_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "3004:3001"
+
+
+
+
+
+
+
+
+
+  5_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "3005:3001"
+  6_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "3006:3001"
+  7_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "3007:3001"
+  8_node:
+    environment:
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "3008:3001"
