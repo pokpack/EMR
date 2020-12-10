@@ -1,35 +1,35 @@
 version: '2'
 services:
-  doctor_node:
+  1_node:
     environment:
-      - PEERS=ws://nurse_node:6001,ws://pharmacist_node:6001,ws://patient_node:6001,ws://nurse_node2:6001,ws://pharmacist_node2:6001,ws://patient_node2:6001,ws://doctor_node:6001//nurse_node3:6001,ws://pharmacist_node3:6001,ws://patient_node3:6001,ws://doctor_node3:6001
+      - PEERS=ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
       dockerfile: Dockerfile
     ports:
       - "3001:3001"
-  pharmacist_node:
+  2_node:
     environment:
-      - PEERS=ws://doctor_node:6001,ws://nurse_node:6001,ws://patient_node:6001,ws://doctor_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001,ws://pharmacist_node2:6001//doctor_node3:6001,ws://nurse_node3:6001,ws://patient_node3:6001,ws://pharmacist_node3:6001
+      - PEERS=ws://1_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
       dockerfile: Dockerfile
     ports:
       - "3002:3001"
-  nurse_node:
+  3_node:
     environment:
-      - PEERS=ws://doctor_node:6001,ws://pharmacist_node:6001,ws://patient_node:6001,ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://patient_node2:6001,//doctor3_node:6001,ws://nurse_node2:6001//pharmacist_node3:6001,ws://patient_node3:6001,ws://nurse_node3:6001
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
       dockerfile: Dockerfile
     ports:
       - "3003:3001"
-  patient_node:
+  4_node:
     environment:
-      - PEERS=ws://doctor_node:6001,ws://pharmacist_node:6001,ws://nurse_node:6001,ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001//doctor_node3:6001,ws://pharmacist_node3:6001,ws://nurse_node3:6001,ws://patient_node3:6001
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
@@ -45,36 +45,36 @@ services:
 
 
 
-  doctor_node2:
+  5_node:
     environment:
-      - PEERS=ws://nurse_node2:6001,ws://pharmacist_node2:6001,ws://patient_node2:6001,ws://nurse_node:6001,ws://pharmacist_node:6001,ws://patient_node:6001,ws://doctor_node:6001,ws://nurse_node3:6001,ws://pharmacist_node3:6001,ws://patient_node3:6001,ws://doctor_node3:6001
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
       dockerfile: Dockerfile
     ports:
       - "3005:3001"
-  pharmacist_node2:
+  6_node:
     environment:
-      - PEERS=ws://doctor_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001,ws://doctor_node:6001,ws://nurse_node:6001,ws://patient_node:6001,ws://pharmacist_node:6001,ws://doctor_node3:6001,ws://nurse_node3:6001,ws://patient_node3:6001,ws://pharmacist_node:6001
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
       dockerfile: Dockerfile
     ports:
       - "3006:3001"
-  nurse_node2:
+  7_node:
     environment:
-      - PEERS=ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://patient_node:6001,ws://doctor_node:6001,ws://pharmacist_node:6001,ws://patient_node:6001,ws://nurse_node:6001,ws://doctor_node3:6001,ws://pharmacist_node3:6001,ws://patient_node3:6001,ws://nurse_node3:6001
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
       dockerfile: Dockerfile
     ports:
       - "3007:3001"
-  patient_node2:
+  8_node:
     environment:
-      - PEERS=ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://nurse_node2:6001,ws://doctor_node:6001,ws://pharmacist_node:6001,ws://nurse_node:6001,ws://patient_node:6001,ws://doctor_node3:6001,ws://pharmacist_node3:6001,ws://nurse_node3:6001,ws://patient_node3:6001
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
@@ -83,36 +83,36 @@ services:
       - "3008:3001"
 
 
-  doctor_node3:
+  9_node:
     environment:
-      - PEERS=ws://doctor_node2:6001,ws://nurse_node2:6001,ws://pharmacist_node2:6001,ws://patient_node2:6001,ws://nurse_node:6001,ws://pharmacist_node:6001,ws://patient_node:6001,ws://doctor_node:6001,ws://nurse_node3:6001,ws://pharmacist_node3:6001,ws://patient_node3:6001
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://10_node:6001,ws://11_node:6001,ws://12_node:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
       dockerfile: Dockerfile
     ports:
       - "3009:3001"
-  pharmacist_node3:
+  10_node:
     environment:
-      - PEERS=ws://doctor_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001,ws://doctor_node:6001,ws://nurse_node:6001,ws://patient_node:6001,ws://patient_node:6001,ws://doctor_node3:6001,ws://nurse_node3:6001,ws://patient_node3:6001,ws://patient_node3:6001
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://11_node:6001,ws://12_node:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
       dockerfile: Dockerfile
     ports:
       - "3010:3001"
-  nurse_node3:
+  11_node:
     environment:
-      - PEERS=ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://patient_node2:6001,ws://doctor_node:6001,ws://pharmacist_node:6001,ws://patient_node:6001,ws://nurse_node:6001,ws://doctor_node3:6001,ws://pharmacist_node3:6001,ws://patient_node3:6001,ws://nurse_node3:6001
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://12_node:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./
       dockerfile: Dockerfile
     ports:
       - "3011:3001"
-  patient_node3:
+  12_node:
     environment:
-      - PEERS=ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://nurse_node2:6001,ws://doctor_node:6001,ws://pharmacist_node:6001,ws://nurse_node:6001,ws://patient_node:6001,ws://doctor_node3:6001,ws://pharmacist_node3:6001,ws://nurse_node3:6001,ws://patient_node3:6001
+      - PEERS=ws://1_node:6001,ws://2_node:6001,ws://3_node:6001,ws://4_node:6001,ws://5_node:6001,ws://6_node:6001,ws://7_node:6001,ws://8_node:6001,ws://9_node:6001,ws://10_node:6001,ws://11_node:6001
       - SECRET_KEY=x]vf4yp0yf
     build:
       context: ./

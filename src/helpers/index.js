@@ -14,7 +14,7 @@ const timeDifference = (date1, date2, index) => {
 
   let secondsDifference = Math.floor(difference / 1000);
   const difference_s = `${daysDifference + ' day/s '} ${hoursDifference + ' hour/s '} ${minutesDifference + ' minute/s '} ${secondsDifference + ' second/s '} ${difference_init + ' ms '}`
-  console.log("==TEST1== +-:-> seconds difference : ", difference_s,"||  index: ",index)
+  console.log("==TEST1== +-:-> seconds difference : ", difference_s, "||  index: ", index)
 }
 
 export const checkDataSize = data => {
