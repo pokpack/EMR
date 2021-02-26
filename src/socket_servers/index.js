@@ -1,7 +1,10 @@
 import { checkDataSize } from '../helpers'
 import { MessageType, updateBlock, handleBlockchainResponse, responseLatestMsg, responseChainMsg } from '../blockchain/logic'
 const write = (ws, message) => ws.send(JSON.stringify(message));
-const broadcast = (sockets, message) => sockets.forEach(ws => write(ws, message));
+const broadcast = (sockets, message) => sockets.forEach(ws => {
+  console.log('Sending to ==>==>==>', ws.url);
+  write(ws, message);
+});
 const initErrorHandler = (ws, sockets, updateSockets) => {
   const closeConnection = (ws) => {
     console.log('connection failed to peer: ' + ws.url);
