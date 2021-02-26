@@ -14,12 +14,13 @@ const timeDifference = (date1, date2, index) => {
 
   let secondsDifference = Math.floor(difference / 1000);
   const difference_s = `${daysDifference + ' day/s '} ${hoursDifference + ' hour/s '} ${minutesDifference + ' minute/s '} ${secondsDifference + ' second/s '} ${difference_init + ' ms '}`
-  console.log("==TEST1== +-:-> seconds difference : ", difference_s, "||  index: ", index)
+  // console.log("==TEST1== +-:-> seconds difference : ", difference_s, "||  index: ", index)
 }
 
 export const checkDataSize = data => {
-  console.log("==TEST2== +-:-> message byte size : ", Buffer.byteLength(data, 'utf8'), 'byte')
+  // console.log("==TEST2== +-:-> message byte size : ", Buffer.byteLength(data, 'utf8'), 'byte')
 }
+
 export const checkdifference = (sent_date, index) => {
   timeDifference(new Date(Date.now()), sent_date, index)
 }

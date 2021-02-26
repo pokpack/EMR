@@ -9,13 +9,13 @@ export const writeData = arr => {
     if (err) {
       throw err;
     }
-    console.log("JSON data is saved.");
+    // console.log("JSON data is saved.");
   });
 }
 export const readData = (defaultData) => {
   try {
     const rawdata = fs.readFileSync(fileInfo);
-    console.log("read data", rawdata)
+    // console.log("read data", rawdata)
     return JSON.parse(rawdata);
   }
   catch (err) {

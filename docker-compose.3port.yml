@@ -1,0 +1,37 @@
+version: '3.8'
+networks: 
+  server_test_net:
+services:
+  first_node:
+    environment:
+      - PEERS=ws://second_node:6001,ws://third_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    networks: 
+        - server_test_net
+    ports:
+      - "3001:3001"
+  second_node:
+    environment:
+      - PEERS=ws://first_node:6001,ws://third_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    networks: 
+        - server_test_net
+    ports:
+      - "3002:3001"
+  third_node:
+    environment:
+      - PEERS=ws://first_node:6001,ws://second_node:6001
+      - SECRET_KEY=x]vf4yp0yf
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    networks: 
+        - server_test_net
+    ports:
+      - "3003:3001"
