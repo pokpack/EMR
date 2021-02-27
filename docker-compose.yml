@@ -9,7 +9,8 @@ services:
     container_name: doctor_node1
     environment:
       - PEERS=ws://pharmacist_node1:6001,ws://nurse_node1:6001,ws://patient_node1:6001,ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001
-      - SECRET_KEY=x]vf4yp0yf
+      - TOKEN_KEY=x]vf4yp0yf
+      - SECRET_KEY=x]vf4dasdf8898sadyp0yf
     build:
       context: ./
       dockerfile: Dockerfile
@@ -19,7 +20,8 @@ services:
     container_name: pharmacist_node1
     environment:
       - PEERS=ws://doctor_node1:6001,ws://nurse_node1:6001,ws://patient_node1:6001,ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001
-      - SECRET_KEY=x]vf4yp0yf
+      - TOKEN_KEY=x]vf4yp0yf
+      - SECRET_KEY=x]vf4dasdf8898sadyp0yf
     build:
       context: ./
       dockerfile: Dockerfile
@@ -29,7 +31,8 @@ services:
     container_name: nurse_node1
     environment:
       - PEERS=ws://doctor_node1:6001,ws://pharmacist_node1:6001,ws://patient_node1:6001,ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001
-      - SECRET_KEY=x]vf4yp0yf
+      - TOKEN_KEY=x]vf4yp0yf
+      - SECRET_KEY=x]vf4dasdf8898sadyp0yf
     build:
       context: ./
       dockerfile: Dockerfile
@@ -39,7 +42,8 @@ services:
     container_name: patient_node1
     environment:
       - PEERS=ws://doctor_node1:6001,ws://pharmacist_node1:6001,ws://nurse_node1:6001,ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001
-      - SECRET_KEY=x]vf4yp0yf
+      - TOKEN_KEY=x]vf4yp0yf
+      - SECRET_KEY=x]vf4dasdf8898sadyp0yf
     build:
       context: ./
       dockerfile: Dockerfile
@@ -49,7 +53,8 @@ services:
     container_name: doctor_node2
     environment:
       - PEERS=ws://doctor_node1:6001,ws://pharmacist_node1:6001,ws://nurse_node1:6001,ws://patient_node1:6001,ws://pharmacist_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001
-      - SECRET_KEY=x]vf4yp0yf
+      - TOKEN_KEY=x]vf4yp0yf
+      - SECRET_KEY=x]vf4dasdf8898sadyp0yf
     build:
       context: ./
       dockerfile: Dockerfile
@@ -59,7 +64,8 @@ services:
     container_name: pharmacist_node2
     environment:
       - PEERS=ws://doctor_node1:6001,ws://pharmacist_node1:6001,ws://nurse_node1:6001,ws://patient_node1:6001,ws://doctor_node2:6001,ws://nurse_node2:6001,ws://patient_node2:6001
-      - SECRET_KEY=x]vf4yp0yf
+      - TOKEN_KEY=x]vf4yp0yf
+      - SECRET_KEY=x]vf4dasdf8898sadyp0yf
     build:
       context: ./
       dockerfile: Dockerfile
@@ -69,7 +75,8 @@ services:
     container_name: nurse_node2
     environment:
       - PEERS=ws://doctor_node1:6001,ws://pharmacist_node1:6001,ws://nurse_node1:6001,ws://patient_node1:6001,ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://patient_node2:6001
-      - SECRET_KEY=x]vf4yp0yf
+      - TOKEN_KEY=x]vf4yp0yf
+      - SECRET_KEY=x]vf4dasdf8898sadyp0yf
     build:
       context: ./
       dockerfile: Dockerfile
@@ -79,7 +86,8 @@ services:
     container_name: patient_node2
     environment:
       - PEERS=ws://doctor_node1:6001,ws://pharmacist_node1:6001,ws://nurse_node1:6001,ws://patient_node1:6001,ws://doctor_node2:6001,ws://pharmacist_node2:6001,ws://nurse_node2:6001
-      - SECRET_KEY=x]vf4yp0yf
+      - TOKEN_KEY=x]vf4yp0yf
+      - SECRET_KEY=x]vf4dasdf8898sadyp0yf
     build:
       context: ./
       dockerfile: Dockerfile

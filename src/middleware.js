@@ -1,5 +1,5 @@
 
-let token = process.env.SECRET_KEY || 'ful6fq';
+let token = process.env.TOKEN_KEY || 'ful6fq';
 const updateToken = newToken => { token = newToken }
 
 export { token, updateToken }
