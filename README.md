@@ -124,6 +124,46 @@ ls  // หาว่ามี blockchain.json มั้ย?
 cat blockchain.json // ดูข้อมูลใน blockchain.json
 
 ```
+
+### Edit data
+
+```
+docker-compose -f docker-compose.3port.yml up --build
+
+#call all data api
+curl -H "Authorization: Bearer x]vf4yp0yf" GET http://localhost:3001/datas
+curl -H "Authorization: Bearer x]vf4yp0yf" GET http://localhost:3002/datas
+curl -H "Authorization: Bearer x]vf4yp0yf" GET http://localhost:3003/datas
+
+#call mien-data api
+curl -H "Content-Type: application/json" -H "Authorization: Bearer x]vf4yp0yf" -X POST  http://localhost:3001/mine-data -d "{\"data\":{\"info\": \"Add first data\"}}"
+
+#edit data
+node tests/mock.test.js
+
+docker ps // third_node
+docker exec –it [CONTAINER ID ที่จะเข้าแก้ใขข้อมูล] /bin/bash
+cat blockchain.json // ดูข้อมูลใน blockchain.json
+
+#call all data api
+
+curl -H "Content-Type: application/json" -H "Authorization: Bearer x]vf4yp0yf" -X POST  http://localhost:3003/mine-data -d "{\"data\":{\"info\": \"Add data intermittent\"}}"
+
+
+#call all data api
+
+curl -H "Content-Type: application/json" -H "Authorization: Bearer x]vf4yp0yf" -X POST  http://localhost:3001/mine-data -d "{\"data\":{\"info\": \"Add data continuously\"}}"
+
+
+#call all data api
+
+curl -H "Content-Type: application/json" -H "Authorization: Bearer x]vf4yp0yf" -X POST  http://localhost:3002/mine-data -d "{\"data\":{\"info\": \"Add data continuously\"}}"
+
+
+#call all data api
+
+```
+
 ## Submodule
 
 https://github.com/pokpack/frontend

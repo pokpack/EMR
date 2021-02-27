@@ -96,6 +96,13 @@ const initHttpServer = () => {
     broadcast(sockets, responseLatestMsg(EMRBlockchain));
     res.send(JSON.stringify(newBlock));
   });
+  app.post('/mine-data', middleware, (req, res) => {
+    const newBlock = generateNextBlock(crypto.encryption(req.body.data), EMRBlockchain, EMRBlock);
+    updateBlock(addBlock(newBlock, EMRBlockchain), EMRBlockchain)
+    broadcast(sockets, responseLatestMsg(EMRBlockchain));
+    res.send(JSON.stringify(newBlock));
+  });
+  app.get('/datas', middleware, (req, res) => res.send(JSON.stringify(EMRBlockchain)));
   app.get('/EMRS/:index/data', (req, res) => {
     const block = EMRBlockchain[req.params.index]
     res.send(new EMRBlock(block['index'], block['previousHash'], block['timestamp'], block['data'], block['hash']).getData())
