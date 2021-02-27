@@ -70,7 +70,7 @@ export const handleBlockchainResponse = (message, blockchain, sockets, getGenesi
   const latestBlockHeld = getLatestBlock(blockchain);
   if (latestBlockReceived.index > latestBlockHeld.index) {
     console.log('blockchain possibly behind. We got: ' + latestBlockHeld.index + ' Peer got: ' + latestBlockReceived.index);
-    if (latestBlockHeld.hash === latestBlockReceived.previousHash) {
+    if (latestBlockHeld.hash === latestBlockReceived.previousHash && isValidChain(blockchain, getGenesisBlock)) {
       console.log("We can append the received block to our chain");
       checkdifference(new Date(latestBlockReceived.timestamp), latestBlockReceived.index); // for test
       blockchain.push(latestBlockReceived);

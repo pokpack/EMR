@@ -5,7 +5,8 @@ services:
   first_node:
     environment:
       - PEERS=ws://second_node:6001,ws://third_node:6001
-      - SECRET_KEY=x]vf4yp0yf
+      - TOKEN_KEY=x]vf4yp0yf
+      - SECRET_KEY=x]vf4dasdf8898sadyp0yf
     build:
       context: ./
       dockerfile: Dockerfile
@@ -16,7 +17,8 @@ services:
   second_node:
     environment:
       - PEERS=ws://first_node:6001,ws://third_node:6001
-      - SECRET_KEY=x]vf4yp0yf
+      - TOKEN_KEY=x]vf4yp0yf
+      - SECRET_KEY=x]vf4dasdf8898sadyp0yf
     build:
       context: ./
       dockerfile: Dockerfile
@@ -27,7 +29,8 @@ services:
   third_node:
     environment:
       - PEERS=ws://first_node:6001,ws://second_node:6001
-      - SECRET_KEY=x]vf4yp0yf
+      - TOKEN_KEY=x]vf4yp0yf
+      - SECRET_KEY=x]vf4dasdf8898sadyp0yf
     build:
       context: ./
       dockerfile: Dockerfile

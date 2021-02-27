@@ -143,8 +143,12 @@ node tests/mock.test.js
 
 docker ps // third_node
 docker exec –it [CONTAINER ID ที่จะเข้าแก้ใขข้อมูล] /bin/bash
+apt-get update
+apt-get install vim nano
 cat blockchain.json // ดูข้อมูลใน blockchain.json
 
+docker-compose -f docker-compose.3port.yml stop first_node
+docker-compose -f docker-compose.3port.yml start first_node
 #call all data api
 
 curl -H "Content-Type: application/json" -H "Authorization: Bearer x]vf4yp0yf" -X POST  http://localhost:3003/mine-data -d "{\"data\":{\"info\": \"Add data intermittent\"}}"
