@@ -53,6 +53,14 @@ ___________
 ``` 
 docker-compose up --build
 ```
+
+### Open docker logs
+
+```
+D:
+cd EMR
+docker-compose logs -t -f
+```
 ___________
 ## **STATE**
 
