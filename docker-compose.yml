@@ -153,7 +153,7 @@ services:
       - db
     environment:
       - EMR_API_URL=doctor_load_balance:8888
-      - BASE_URL=http://144.126.218.79:5001
+      - BASE_URL=http://188.166.176.20:5001
       - DB_URL=db
       - DB_USER_NAME=dbuser
       - DB_PASSWORD=userpass
@@ -171,7 +171,7 @@ services:
       - db
     environment:
       - EMR_API_URL=pharmacist_load_balance:8888
-      - BASE_URL=http://144.126.218.79:5002
+      - BASE_URL=http://188.166.176.20:5002
       - DB_URL=db
       - DB_USER_NAME=dbuser
       - DB_PASSWORD=userpass
@@ -189,7 +189,7 @@ services:
       - db
     environment:
       - EMR_API_URL=nurse_load_balance:8888
-      - BASE_URL=http://144.126.218.79:5003
+      - BASE_URL=http://188.166.176.20:5003
       - DB_URL=db
       - DB_USER_NAME=dbuser
       - DB_PASSWORD=userpass
@@ -207,7 +207,7 @@ services:
       - db
     environment:
       - EMR_API_URL=patient_load_balance:8888
-      - BASE_URL=http://144.126.218.79:5004
+      - BASE_URL=http://188.166.176.20:5004
       - DB_URL=db
       - DB_USER_NAME=dbuser
       - DB_PASSWORD=userpass
